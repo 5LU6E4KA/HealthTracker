@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="27fed867d4384853a724f4d9b274d4fa" Name="Diagram1">
+        <EntityTypeShape EntityType="HealthTrackerModel.BloodPressureInformations" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.FoodInformations" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.Meals" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.PulseInformations" Width="1.5" PointX="3.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.SleepInformations" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.SleepModes" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.TemperatureInformations" Width="1.5" PointX="3.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.Users" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.VitalSigns" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthTrackerModel.WaterInformations" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <AssociationConnector Association="HealthTrackerModel.FK__VitalSign__Blood__47A6A41B" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthTrackerModel.FK__Meals__FoodInfor__42E1EEFE" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthTrackerModel.FK__Meals__UserID__41EDCAC5" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthTrackerModel.FK__Meals__WaterInfo__43D61337" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthTrackerModel.FK__VitalSign__Pulse__46B27FE2" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthTrackerModel.FK__SleepMode__Sleep__498EEC8D" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthTrackerModel.FK__SleepMode__UserI__489AC854" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthTrackerModel.FK__VitalSign__Tempe__45BE5BA9" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthTrackerModel.FK__VitalSign__UserI__44CA3770" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

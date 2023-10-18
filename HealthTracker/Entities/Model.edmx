@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище HealthTrackerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BloodPressureInformations">
+          <Key>
+            <PropertyRef Name="BloodPressureInformationID" />
+          </Key>
+          <Property Name="BloodPressureInformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeasurementTimeBloodPressure" Type="time" Precision="7" />
+          <Property Name="SystolicPressure" Type="int" Nullable="false" />
+          <Property Name="DiastolicPressure" Type="int" Nullable="false" />
+          <Property Name="BodyPosition" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FoodInformations">
+          <Key>
+            <PropertyRef Name="FoodInformationID" />
+          </Key>
+          <Property Name="FoodInformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MealTime" Type="time" Precision="7" />
+          <Property Name="Intake" Type="nvarchar" MaxLength="30" />
+          <Property Name="FoodProduct" Type="nvarchar" MaxLength="150" />
+          <Property Name="AmountOfCalories" Type="decimal" Precision="5" Scale="1" Nullable="false" />
+          <Property Name="AmountOfCarbohydrates" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="AmountOfProtein" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="AmountOfSugar" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="AmountOfFat" Type="decimal" Precision="4" Scale="1" />
+        </EntityType>
+        <EntityType Name="Meals">
+          <Key>
+            <PropertyRef Name="MealID" />
+          </Key>
+          <Property Name="MealID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FoodInformationID" Type="int" Nullable="false" />
+          <Property Name="WaterInformationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PulseInformations">
+          <Key>
+            <PropertyRef Name="PulseInformationID" />
+          </Key>
+          <Property Name="PulseInformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeasurementTimePulse" Type="time" Precision="7" />
+          <Property Name="Pulse" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SleepInformations">
+          <Key>
+            <PropertyRef Name="SleepInformationID" />
+          </Key>
+          <Property Name="SleepInformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bedtime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="WakeUpTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SleepModes">
+          <Key>
+            <PropertyRef Name="SleepModeID" />
+          </Key>
+          <Property Name="SleepModeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SleepInformationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TemperatureInformations">
+          <Key>
+            <PropertyRef Name="TemperatureInformationID" />
+          </Key>
+          <Property Name="TemperatureInformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeasurementTimeTemperature" Type="time" Precision="7" />
+          <Property Name="BodyTemperature" Type="decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="MeasurementPlace" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="VitalSigns">
+          <Key>
+            <PropertyRef Name="VitalSignID" />
+          </Key>
+          <Property Name="VitalSignID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TemperatureInformationID" Type="int" Nullable="false" />
+          <Property Name="PulseInformationID" Type="int" Nullable="false" />
+          <Property Name="BloodPressureInformationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WaterInformations">
+          <Key>
+            <PropertyRef Name="WaterInformationID" />
+          </Key>
+          <Property Name="WaterInformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrinkingTime" Type="time" Precision="7" />
+          <Property Name="LiquidLevel" Type="decimal" Precision="5" Scale="1" Nullable="false" />
+          <Property Name="LiquidType" Type="nvarchar" MaxLength="60" />
+        </EntityType>
+        <Association Name="FK__Meals__FoodInfor__42E1EEFE">
+          <End Role="FoodInformations" Type="Self.FoodInformations" Multiplicity="1" />
+          <End Role="Meals" Type="Self.Meals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodInformations">
+              <PropertyRef Name="FoodInformationID" />
+            </Principal>
+            <Dependent Role="Meals">
+              <PropertyRef Name="FoodInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meals__UserID__41EDCAC5">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Meals" Type="Self.Meals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Meals">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meals__WaterInfo__43D61337">
+          <End Role="WaterInformations" Type="Self.WaterInformations" Multiplicity="1" />
+          <End Role="Meals" Type="Self.Meals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WaterInformations">
+              <PropertyRef Name="WaterInformationID" />
+            </Principal>
+            <Dependent Role="Meals">
+              <PropertyRef Name="WaterInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SleepMode__Sleep__498EEC8D">
+          <End Role="SleepInformations" Type="Self.SleepInformations" Multiplicity="1" />
+          <End Role="SleepModes" Type="Self.SleepModes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SleepInformations">
+              <PropertyRef Name="SleepInformationID" />
+            </Principal>
+            <Dependent Role="SleepModes">
+              <PropertyRef Name="SleepInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SleepMode__UserI__489AC854">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="SleepModes" Type="Self.SleepModes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SleepModes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VitalSign__Blood__47A6A41B">
+          <End Role="BloodPressureInformations" Type="Self.BloodPressureInformations" Multiplicity="1" />
+          <End Role="VitalSigns" Type="Self.VitalSigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodPressureInformations">
+              <PropertyRef Name="BloodPressureInformationID" />
+            </Principal>
+            <Dependent Role="VitalSigns">
+              <PropertyRef Name="BloodPressureInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VitalSign__Pulse__46B27FE2">
+          <End Role="PulseInformations" Type="Self.PulseInformations" Multiplicity="1" />
+          <End Role="VitalSigns" Type="Self.VitalSigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PulseInformations">
+              <PropertyRef Name="PulseInformationID" />
+            </Principal>
+            <Dependent Role="VitalSigns">
+              <PropertyRef Name="PulseInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VitalSign__Tempe__45BE5BA9">
+          <End Role="TemperatureInformations" Type="Self.TemperatureInformations" Multiplicity="1" />
+          <End Role="VitalSigns" Type="Self.VitalSigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemperatureInformations">
+              <PropertyRef Name="TemperatureInformationID" />
+            </Principal>
+            <Dependent Role="VitalSigns">
+              <PropertyRef Name="TemperatureInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VitalSign__UserI__44CA3770">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="VitalSigns" Type="Self.VitalSigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="VitalSigns">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище HealthTrackerModelContainer">
+          <EntitySet Name="BloodPressureInformations" EntityType="Self.BloodPressureInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoodInformations" EntityType="Self.FoodInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meals" EntityType="Self.Meals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PulseInformations" EntityType="Self.PulseInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SleepInformations" EntityType="Self.SleepInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SleepModes" EntityType="Self.SleepModes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemperatureInformations" EntityType="Self.TemperatureInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VitalSigns" EntityType="Self.VitalSigns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WaterInformations" EntityType="Self.WaterInformations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Meals__FoodInfor__42E1EEFE" Association="Self.FK__Meals__FoodInfor__42E1EEFE">
+            <End Role="FoodInformations" EntitySet="FoodInformations" />
+            <End Role="Meals" EntitySet="Meals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meals__UserID__41EDCAC5" Association="Self.FK__Meals__UserID__41EDCAC5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Meals" EntitySet="Meals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meals__WaterInfo__43D61337" Association="Self.FK__Meals__WaterInfo__43D61337">
+            <End Role="WaterInformations" EntitySet="WaterInformations" />
+            <End Role="Meals" EntitySet="Meals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SleepMode__Sleep__498EEC8D" Association="Self.FK__SleepMode__Sleep__498EEC8D">
+            <End Role="SleepInformations" EntitySet="SleepInformations" />
+            <End Role="SleepModes" EntitySet="SleepModes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SleepMode__UserI__489AC854" Association="Self.FK__SleepMode__UserI__489AC854">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SleepModes" EntitySet="SleepModes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VitalSign__Blood__47A6A41B" Association="Self.FK__VitalSign__Blood__47A6A41B">
+            <End Role="BloodPressureInformations" EntitySet="BloodPressureInformations" />
+            <End Role="VitalSigns" EntitySet="VitalSigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VitalSign__Pulse__46B27FE2" Association="Self.FK__VitalSign__Pulse__46B27FE2">
+            <End Role="PulseInformations" EntitySet="PulseInformations" />
+            <End Role="VitalSigns" EntitySet="VitalSigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VitalSign__Tempe__45BE5BA9" Association="Self.FK__VitalSign__Tempe__45BE5BA9">
+            <End Role="TemperatureInformations" EntitySet="TemperatureInformations" />
+            <End Role="VitalSigns" EntitySet="VitalSigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VitalSign__UserI__44CA3770" Association="Self.FK__VitalSign__UserI__44CA3770">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VitalSigns" EntitySet="VitalSigns" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthTrackerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BloodPressureInformations">
+          <Key>
+            <PropertyRef Name="BloodPressureInformationID" />
+          </Key>
+          <Property Name="BloodPressureInformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeasurementTimeBloodPressure" Type="Time" Precision="7" />
+          <Property Name="SystolicPressure" Type="Int32" Nullable="false" />
+          <Property Name="DiastolicPressure" Type="Int32" Nullable="false" />
+          <Property Name="BodyPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VitalSigns" Relationship="Self.FK__VitalSign__Blood__47A6A41B" FromRole="BloodPressureInformations" ToRole="VitalSigns" />
+        </EntityType>
+        <EntityType Name="FoodInformations">
+          <Key>
+            <PropertyRef Name="FoodInformationID" />
+          </Key>
+          <Property Name="FoodInformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MealTime" Type="Time" Precision="7" />
+          <Property Name="Intake" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FoodProduct" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AmountOfCalories" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
+          <Property Name="AmountOfCarbohydrates" Type="Decimal" Precision="4" Scale="1" />
+          <Property Name="AmountOfProtein" Type="Decimal" Precision="4" Scale="1" />
+          <Property Name="AmountOfSugar" Type="Decimal" Precision="4" Scale="1" />
+          <Property Name="AmountOfFat" Type="Decimal" Precision="4" Scale="1" />
+          <NavigationProperty Name="Meals" Relationship="Self.FK__Meals__FoodInfor__42E1EEFE" FromRole="FoodInformations" ToRole="Meals" />
+        </EntityType>
+        <EntityType Name="Meals">
+          <Key>
+            <PropertyRef Name="MealID" />
+          </Key>
+          <Property Name="MealID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FoodInformationID" Type="Int32" Nullable="false" />
+          <Property Name="WaterInformationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FoodInformations" Relationship="Self.FK__Meals__FoodInfor__42E1EEFE" FromRole="Meals" ToRole="FoodInformations" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Meals__UserID__41EDCAC5" FromRole="Meals" ToRole="Users" />
+          <NavigationProperty Name="WaterInformations" Relationship="Self.FK__Meals__WaterInfo__43D61337" FromRole="Meals" ToRole="WaterInformations" />
+        </EntityType>
+        <EntityType Name="PulseInformations">
+          <Key>
+            <PropertyRef Name="PulseInformationID" />
+          </Key>
+          <Property Name="PulseInformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeasurementTimePulse" Type="Time" Precision="7" />
+          <Property Name="Pulse" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="VitalSigns" Relationship="Self.FK__VitalSign__Pulse__46B27FE2" FromRole="PulseInformations" ToRole="VitalSigns" />
+        </EntityType>
+        <EntityType Name="SleepInformations">
+          <Key>
+            <PropertyRef Name="SleepInformationID" />
+          </Key>
+          <Property Name="SleepInformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bedtime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="WakeUpTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="SleepModes" Relationship="Self.FK__SleepMode__Sleep__498EEC8D" FromRole="SleepInformations" ToRole="SleepModes" />
+        </EntityType>
+        <EntityType Name="SleepModes">
+          <Key>
+            <PropertyRef Name="SleepModeID" />
+          </Key>
+          <Property Name="SleepModeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SleepInformationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SleepInformations" Relationship="Self.FK__SleepMode__Sleep__498EEC8D" FromRole="SleepModes" ToRole="SleepInformations" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__SleepMode__UserI__489AC854" FromRole="SleepModes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TemperatureInformations">
+          <Key>
+            <PropertyRef Name="TemperatureInformationID" />
+          </Key>
+          <Property Name="TemperatureInformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeasurementTimeTemperature" Type="Time" Precision="7" />
+          <Property Name="BodyTemperature" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="MeasurementPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VitalSigns" Relationship="Self.FK__VitalSign__Tempe__45BE5BA9" FromRole="TemperatureInformations" ToRole="VitalSigns" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Meals" Relationship="Self.FK__Meals__UserID__41EDCAC5" FromRole="Users" ToRole="Meals" />
+          <NavigationProperty Name="SleepModes" Relationship="Self.FK__SleepMode__UserI__489AC854" FromRole="Users" ToRole="SleepModes" />
+          <NavigationProperty Name="VitalSigns" Relationship="Self.FK__VitalSign__UserI__44CA3770" FromRole="Users" ToRole="VitalSigns" />
+        </EntityType>
+        <EntityType Name="VitalSigns">
+          <Key>
+            <PropertyRef Name="VitalSignID" />
+          </Key>
+          <Property Name="VitalSignID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TemperatureInformationID" Type="Int32" Nullable="false" />
+          <Property Name="PulseInformationID" Type="Int32" Nullable="false" />
+          <Property Name="BloodPressureInformationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BloodPressureInformations" Relationship="Self.FK__VitalSign__Blood__47A6A41B" FromRole="VitalSigns" ToRole="BloodPressureInformations" />
+          <NavigationProperty Name="PulseInformations" Relationship="Self.FK__VitalSign__Pulse__46B27FE2" FromRole="VitalSigns" ToRole="PulseInformations" />
+          <NavigationProperty Name="TemperatureInformations" Relationship="Self.FK__VitalSign__Tempe__45BE5BA9" FromRole="VitalSigns" ToRole="TemperatureInformations" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__VitalSign__UserI__44CA3770" FromRole="VitalSigns" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="WaterInformations">
+          <Key>
+            <PropertyRef Name="WaterInformationID" />
+          </Key>
+          <Property Name="WaterInformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrinkingTime" Type="Time" Precision="7" />
+          <Property Name="LiquidLevel" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
+          <Property Name="LiquidType" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Meals" Relationship="Self.FK__Meals__WaterInfo__43D61337" FromRole="WaterInformations" ToRole="Meals" />
+        </EntityType>
+        <Association Name="FK__VitalSign__Blood__47A6A41B">
+          <End Role="BloodPressureInformations" Type="Self.BloodPressureInformations" Multiplicity="1" />
+          <End Role="VitalSigns" Type="Self.VitalSigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodPressureInformations">
+              <PropertyRef Name="BloodPressureInformationID" />
+            </Principal>
+            <Dependent Role="VitalSigns">
+              <PropertyRef Name="BloodPressureInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meals__FoodInfor__42E1EEFE">
+          <End Role="FoodInformations" Type="Self.FoodInformations" Multiplicity="1" />
+          <End Role="Meals" Type="Self.Meals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodInformations">
+              <PropertyRef Name="FoodInformationID" />
+            </Principal>
+            <Dependent Role="Meals">
+              <PropertyRef Name="FoodInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meals__UserID__41EDCAC5">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Meals" Type="Self.Meals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Meals">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meals__WaterInfo__43D61337">
+          <End Role="WaterInformations" Type="Self.WaterInformations" Multiplicity="1" />
+          <End Role="Meals" Type="Self.Meals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WaterInformations">
+              <PropertyRef Name="WaterInformationID" />
+            </Principal>
+            <Dependent Role="Meals">
+              <PropertyRef Name="WaterInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VitalSign__Pulse__46B27FE2">
+          <End Role="PulseInformations" Type="Self.PulseInformations" Multiplicity="1" />
+          <End Role="VitalSigns" Type="Self.VitalSigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PulseInformations">
+              <PropertyRef Name="PulseInformationID" />
+            </Principal>
+            <Dependent Role="VitalSigns">
+              <PropertyRef Name="PulseInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SleepMode__Sleep__498EEC8D">
+          <End Role="SleepInformations" Type="Self.SleepInformations" Multiplicity="1" />
+          <End Role="SleepModes" Type="Self.SleepModes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SleepInformations">
+              <PropertyRef Name="SleepInformationID" />
+            </Principal>
+            <Dependent Role="SleepModes">
+              <PropertyRef Name="SleepInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SleepMode__UserI__489AC854">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="SleepModes" Type="Self.SleepModes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SleepModes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VitalSign__Tempe__45BE5BA9">
+          <End Role="TemperatureInformations" Type="Self.TemperatureInformations" Multiplicity="1" />
+          <End Role="VitalSigns" Type="Self.VitalSigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemperatureInformations">
+              <PropertyRef Name="TemperatureInformationID" />
+            </Principal>
+            <Dependent Role="VitalSigns">
+              <PropertyRef Name="TemperatureInformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VitalSign__UserI__44CA3770">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="VitalSigns" Type="Self.VitalSigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="VitalSigns">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthTrackerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BloodPressureInformations" EntityType="Self.BloodPressureInformations" />
+          <EntitySet Name="FoodInformations" EntityType="Self.FoodInformations" />
+          <EntitySet Name="Meals" EntityType="Self.Meals" />
+          <EntitySet Name="PulseInformations" EntityType="Self.PulseInformations" />
+          <EntitySet Name="SleepInformations" EntityType="Self.SleepInformations" />
+          <EntitySet Name="SleepModes" EntityType="Self.SleepModes" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TemperatureInformations" EntityType="Self.TemperatureInformations" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="VitalSigns" EntityType="Self.VitalSigns" />
+          <EntitySet Name="WaterInformations" EntityType="Self.WaterInformations" />
+          <AssociationSet Name="FK__VitalSign__Blood__47A6A41B" Association="Self.FK__VitalSign__Blood__47A6A41B">
+            <End Role="BloodPressureInformations" EntitySet="BloodPressureInformations" />
+            <End Role="VitalSigns" EntitySet="VitalSigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meals__FoodInfor__42E1EEFE" Association="Self.FK__Meals__FoodInfor__42E1EEFE">
+            <End Role="FoodInformations" EntitySet="FoodInformations" />
+            <End Role="Meals" EntitySet="Meals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meals__UserID__41EDCAC5" Association="Self.FK__Meals__UserID__41EDCAC5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Meals" EntitySet="Meals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meals__WaterInfo__43D61337" Association="Self.FK__Meals__WaterInfo__43D61337">
+            <End Role="WaterInformations" EntitySet="WaterInformations" />
+            <End Role="Meals" EntitySet="Meals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VitalSign__Pulse__46B27FE2" Association="Self.FK__VitalSign__Pulse__46B27FE2">
+            <End Role="PulseInformations" EntitySet="PulseInformations" />
+            <End Role="VitalSigns" EntitySet="VitalSigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SleepMode__Sleep__498EEC8D" Association="Self.FK__SleepMode__Sleep__498EEC8D">
+            <End Role="SleepInformations" EntitySet="SleepInformations" />
+            <End Role="SleepModes" EntitySet="SleepModes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SleepMode__UserI__489AC854" Association="Self.FK__SleepMode__UserI__489AC854">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SleepModes" EntitySet="SleepModes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VitalSign__Tempe__45BE5BA9" Association="Self.FK__VitalSign__Tempe__45BE5BA9">
+            <End Role="TemperatureInformations" EntitySet="TemperatureInformations" />
+            <End Role="VitalSigns" EntitySet="VitalSigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VitalSign__UserI__44CA3770" Association="Self.FK__VitalSign__UserI__44CA3770">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VitalSigns" EntitySet="VitalSigns" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище HealthTrackerModelContainer" CdmEntityContainer="HealthTrackerEntities">
+          <EntitySetMapping Name="BloodPressureInformations">
+            <EntityTypeMapping TypeName="HealthTrackerModel.BloodPressureInformations">
+              <MappingFragment StoreEntitySet="BloodPressureInformations">
+                <ScalarProperty Name="BloodPressureInformationID" ColumnName="BloodPressureInformationID" />
+                <ScalarProperty Name="MeasurementTimeBloodPressure" ColumnName="MeasurementTimeBloodPressure" />
+                <ScalarProperty Name="SystolicPressure" ColumnName="SystolicPressure" />
+                <ScalarProperty Name="DiastolicPressure" ColumnName="DiastolicPressure" />
+                <ScalarProperty Name="BodyPosition" ColumnName="BodyPosition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodInformations">
+            <EntityTypeMapping TypeName="HealthTrackerModel.FoodInformations">
+              <MappingFragment StoreEntitySet="FoodInformations">
+                <ScalarProperty Name="FoodInformationID" ColumnName="FoodInformationID" />
+                <ScalarProperty Name="MealTime" ColumnName="MealTime" />
+                <ScalarProperty Name="Intake" ColumnName="Intake" />
+                <ScalarProperty Name="FoodProduct" ColumnName="FoodProduct" />
+                <ScalarProperty Name="AmountOfCalories" ColumnName="AmountOfCalories" />
+                <ScalarProperty Name="AmountOfCarbohydrates" ColumnName="AmountOfCarbohydrates" />
+                <ScalarProperty Name="AmountOfProtein" ColumnName="AmountOfProtein" />
+                <ScalarProperty Name="AmountOfSugar" ColumnName="AmountOfSugar" />
+                <ScalarProperty Name="AmountOfFat" ColumnName="AmountOfFat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meals">
+            <EntityTypeMapping TypeName="HealthTrackerModel.Meals">
+              <MappingFragment StoreEntitySet="Meals">
+                <ScalarProperty Name="MealID" ColumnName="MealID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FoodInformationID" ColumnName="FoodInformationID" />
+                <ScalarProperty Name="WaterInformationID" ColumnName="WaterInformationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PulseInformations">
+            <EntityTypeMapping TypeName="HealthTrackerModel.PulseInformations">
+              <MappingFragment StoreEntitySet="PulseInformations">
+                <ScalarProperty Name="PulseInformationID" ColumnName="PulseInformationID" />
+                <ScalarProperty Name="MeasurementTimePulse" ColumnName="MeasurementTimePulse" />
+                <ScalarProperty Name="Pulse" ColumnName="Pulse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SleepInformations">
+            <EntityTypeMapping TypeName="HealthTrackerModel.SleepInformations">
+              <MappingFragment StoreEntitySet="SleepInformations">
+                <ScalarProperty Name="SleepInformationID" ColumnName="SleepInformationID" />
+                <ScalarProperty Name="Bedtime" ColumnName="Bedtime" />
+                <ScalarProperty Name="WakeUpTime" ColumnName="WakeUpTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SleepModes">
+            <EntityTypeMapping TypeName="HealthTrackerModel.SleepModes">
+              <MappingFragment StoreEntitySet="SleepModes">
+                <ScalarProperty Name="SleepModeID" ColumnName="SleepModeID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SleepInformationID" ColumnName="SleepInformationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HealthTrackerModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemperatureInformations">
+            <EntityTypeMapping TypeName="HealthTrackerModel.TemperatureInformations">
+              <MappingFragment StoreEntitySet="TemperatureInformations">
+                <ScalarProperty Name="TemperatureInformationID" ColumnName="TemperatureInformationID" />
+                <ScalarProperty Name="MeasurementTimeTemperature" ColumnName="MeasurementTimeTemperature" />
+                <ScalarProperty Name="BodyTemperature" ColumnName="BodyTemperature" />
+                <ScalarProperty Name="MeasurementPlace" ColumnName="MeasurementPlace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HealthTrackerModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VitalSigns">
+            <EntityTypeMapping TypeName="HealthTrackerModel.VitalSigns">
+              <MappingFragment StoreEntitySet="VitalSigns">
+                <ScalarProperty Name="VitalSignID" ColumnName="VitalSignID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TemperatureInformationID" ColumnName="TemperatureInformationID" />
+                <ScalarProperty Name="PulseInformationID" ColumnName="PulseInformationID" />
+                <ScalarProperty Name="BloodPressureInformationID" ColumnName="BloodPressureInformationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaterInformations">
+            <EntityTypeMapping TypeName="HealthTrackerModel.WaterInformations">
+              <MappingFragment StoreEntitySet="WaterInformations">
+                <ScalarProperty Name="WaterInformationID" ColumnName="WaterInformationID" />
+                <ScalarProperty Name="DrinkingTime" ColumnName="DrinkingTime" />
+                <ScalarProperty Name="LiquidLevel" ColumnName="LiquidLevel" />
+                <ScalarProperty Name="LiquidType" ColumnName="LiquidType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
