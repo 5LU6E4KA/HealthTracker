@@ -31,8 +31,7 @@ namespace HealthTracker.Pages
 
         private void NavigationToMainMenu()
         {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
+            new MainMenu().Show();
             this.Close();
         }
 
