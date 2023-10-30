@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style x:Key="ActionSelectionCheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="Margin" Value="50,40,0,0" />
+        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="IsChecked" Value="True" />
+        <Setter Property="ToolTip" Value="Поставьте галочку, если хотите зарегистрироваться.&#10;Если нужна авторизация, то оставьте поле пустым" />
+    </Style>
+
+</ResourceDictionary>

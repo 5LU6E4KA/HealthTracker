@@ -7,10 +7,9 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/StyleForUIElements/ClassicTheme.xaml" />
-                <ResourceDictionary Source="/Resources/StyleForUIElements/ButtonStyle.xaml" />
-                <ResourceDictionary Source="/Resources/StyleForUIElements/RadioButtonStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/Icons.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/ClassicTheme.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/ModernTheme.xaml" />
+                <ResourceDictionary Source="/Resources/Dictionaries/UIElementsDictionary.xaml" />
                 <ResourceDictionary Source="/Resources/Dictionaries/VectorImagesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

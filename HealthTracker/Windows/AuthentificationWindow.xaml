@@ -21,7 +21,7 @@
             <ColumnDefinition Width="25" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Style="{StaticResource FirstHalfAuthentificationStyle}" />
+        <Grid Grid.Column="0" Style="{StaticResource FirstHalfAuthentificationStyle }" />
         <Grid
             Grid.Row="1"
             Grid.Column="0"
@@ -39,14 +39,17 @@
         <Button
             x:Name="ButtonMinimaze"
             Grid.Column="2"
+            Content="{DynamicResource minimize}"
             Click="ButtonMinimaze_Click"
-            Style="{StaticResource ButtonMinimazeStyle}" />
+            Style="{DynamicResource IconButtonsStyle}" />
 
         <Button
             x:Name="ButtonClose"
             Grid.Column="3"
             Click="ButtonClose_Click"
-            Style="{StaticResource ButtonCloseStyle}" />
+            Content="{DynamicResource close}"
+            Style="{DynamicResource IconButtonsStyle}"
+            Tag="Isclo" Cursor="Hand"/>
 
         <StackPanel
             x:Name="StackPanelLogoText"
@@ -54,7 +57,7 @@
             Grid.Column="0"
             Style="{StaticResource StackPanelLogoTextStyle}">
 
-            <Image x:Name="IconHealth" Style="{StaticResource IconHealthStyle}" />
+            <Image x:Name="IconHealth" Style="{DynamicResource HeaderIcon}" Margin="15" />
 
             <TextBlock x:Name="NameProgramProduct" Style="{StaticResource NameProgramProductStyle}" />
 

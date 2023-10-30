@@ -24,5 +24,80 @@ namespace HealthTracker.Pages
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            BMICalculation();
+        }
+
+        public void BMICalculation()
+        {
+            try
+            {
+                double weight = Convert.ToDouble(WeightTextBox.Text);
+                double height = Convert.ToDouble(HeightTextBox.Text);
+
+                double bmi = weight / Math.Pow(height, 2);
+                double roundedBmi = Math.Round(bmi, 1);
+
+                ResultBMITextBlock.Text = $"Ваш индекс массы тела: {roundedBmi}";
+
+                string generalization;
+
+                if (roundedBmi >= 40)
+                {
+                    generalization = "Ожирение третьей степени";
+                }
+                else if (roundedBmi >= 35)
+                {
+                    generalization = "Ожирение второй степени";
+                }
+                else if (roundedBmi >= 30)
+                {
+                    generalization = "Ожирение первой степени";
+                }
+                else if (roundedBmi >= 25)
+                {
+                    generalization = "Лишний вес";
+                }
+                else if (roundedBmi >= 18.5)
+                {
+                    generalization = "Норма";
+                }
+                else
+                {
+                    generalization = "Дефицит массы тела";
+                }
+
+                GeneralizationBMITextBlock.Text = generalization;
+            }
+            catch (FormatException)
+            {
+                // Обработка ошибки преобразования пустой строки в double
+                MessageBox.Show("Пожалуйста, введите числовые значения в поля.", "BMI Калькулятор");
+            }
+        }
+
+        private bool IsNumeric(string text)
+        {
+            double result;
+            return double.TryParse(text, out result);
+        }
+
+        private void HeightTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!IsNumeric(e.Text) && e.Text != ",")
+            {
+                e.Handled = true; 
+            }
+        }
+
+        private void WeightTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!IsNumeric(e.Text) && e.Text != ",")
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

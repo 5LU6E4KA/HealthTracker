@@ -6,20 +6,74 @@
     xmlns:local="clr-namespace:HealthTracker.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="BMIPage"
-    d:DesignHeight="450"
+    d:DesignHeight="650"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid>
-        <Border Background="White" CornerRadius="8">
-            <Label
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Content="BMI"
-                FontSize="50"
-                FontWeight="Bold"
-                Foreground="{DynamicResource PrimaryTextColor}" />
-        </Border>
+    <Grid >
+        <Border Background="White" CornerRadius="8" />
 
+        <StackPanel
+            Width="400"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
+            <Border
+                Margin="0,20,0,20"
+                BorderBrush="Black"
+                BorderThickness="1"
+                CornerRadius="30">
+                <StackPanel>
+                    <TextBlock
+                        Height="40"
+                        Margin="0,40,0,40"
+                        FontSize="28"
+                        Text="BMI Калькулятор"
+                        TextAlignment="Center" />
+                    <TextBlock
+                        Height="40"
+                        Margin="20,40,0,0"
+                        FontSize="18"
+                        Text="Вес (кг)"
+                        TextAlignment="Left" />
+                    <TextBox
+                        x:Name="WeightTextBox"
+                        Height="40"
+                        Margin="20,1,20,0"
+                        PreviewTextInput="WeightTextBox_PreviewTextInput"
+                        TextAlignment="Left" />
+                    <TextBlock
+                        Height="40"
+                        Margin="20,40,0,0"
+                        FontSize="18"
+                        Text="Рост (м)"
+                        TextAlignment="Left" />
+                    <TextBox
+                        x:Name="HeightTextBox"
+                        Height="40"
+                        Margin="20,1,20,0"
+                        PreviewTextInput="HeightTextBox_PreviewTextInput"
+                        TextAlignment="Left" />
+                    <Button
+                        Height="40"
+                        Margin="0,40,0,0"
+                        HorizontalAlignment="Center"
+                        Click="Button_Click"
+                        Content="Рассчитать" />
+                    <TextBlock
+                        x:Name="ResultBMITextBlock"
+                        Width="250"
+                        Height="40"
+                        Margin="0,40,0,0"
+                        Text="" />
+                    <TextBlock
+                        x:Name="GeneralizationBMITextBlock"
+                        Width="250"
+                        Height="40"
+                        Margin="0,10,0,20"
+                        Text="" />
+
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </Grid>
 </Page>

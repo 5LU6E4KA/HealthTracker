@@ -92,4 +92,33 @@
         </Setter>
     </Style>
     <!--  End: Button | Minimize | Maximize | Close  -->
+
+    <Style x:Key="SignInButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="150" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Margin" Value="50,50,0,0" />
+        <Setter Property="Background" Value="#5B47C8" />
+        <Setter Property="Content" Value="Войти" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#9F93E3" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

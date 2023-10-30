@@ -47,14 +47,16 @@
                             Foreground="{DynamicResource SecundaryBlueColor}" />
                     </StackPanel>
 
+
                     <StackPanel Grid.Row="1">
                         <RadioButton
-                            x:Name="rdHome"
+                            x:Name="rdHone"
                             Margin="0,30,0,0"
                             Click="rdHome_Click"
                             Content="BMI"
                             Style="{DynamicResource MenuRadioButtonStyle}"
-                            Tag="{DynamicResource BMIIcon}" />
+                            Tag="{DynamicResource bmi}" />
+
                         <RadioButton
                             x:Name="rdAnalytics"
                             Margin="0,1,0,1"

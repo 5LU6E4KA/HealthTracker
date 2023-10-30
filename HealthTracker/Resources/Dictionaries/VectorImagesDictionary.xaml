@@ -2,11 +2,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Images/Vectors/HeaderIcon.xaml" />
-        <ResourceDictionary Source="/Images/Vectors/BMIIcon.xaml" />
-        <ResourceDictionary Source="/Images/Vectors/RecomendationsIcon.xaml" />
-
-
+        <ResourceDictionary Source="/Images/Vectors/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
 
 </ResourceDictionary>
