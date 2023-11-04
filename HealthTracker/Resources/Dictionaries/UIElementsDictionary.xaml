@@ -9,6 +9,11 @@
         <ResourceDictionary Source="/Resources/StyleForUIElements/TextBlockStyle.xaml" />
         <ResourceDictionary Source="/Resources/StyleForUIElements/TextBoxStyle.xaml" />
         <ResourceDictionary Source="/Resources/StyleForUIElements/WindowStyle.xaml" />
+        <ResourceDictionary Source="/Resources/StyleForUIElements/ExpanderStyle.xaml" />
+        <ResourceDictionary Source="/Resources/StyleForUIElements/BorderStyle.xaml" />
+        <ResourceDictionary Source="/Resources/StyleForUIElements/ImageStyle.xaml" />
+        <ResourceDictionary Source="/Resources/StyleForUIElements/LabelStyle.xaml" />
+        <ResourceDictionary Source="/Resources/StyleForUIElements/PathStyle.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 

@@ -5,9 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HealthTracker.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Window_Loaded"
     Style="{StaticResource WindowMenuStyle}"
     WindowStartupLocation="CenterScreen">
-    <Border Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="10">
+    <Border Style="{StaticResource MenuBorderStyle}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250" />
@@ -15,11 +16,8 @@
             </Grid.ColumnDefinitions>
 
             <!--  Start: GridColumn Left  -->
-            <Border
-                Padding="10"
-                Background="{DynamicResource SecundaryBackgroundColor}"
-                CornerRadius="10 0 0 10">
-                <Grid x:Name="gridMenu">
+            <Border Style="{StaticResource MenuLeftBorderStyle}">
+                <Grid x:Name="GridMenu">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60" />
                         <RowDefinition Height="*" />
@@ -36,65 +34,47 @@
                             VerticalAlignment="Center"
                             Stretch="Fill"
                             Style="{DynamicResource HeaderIcon}" />
-                        <Label
-                            Margin="5,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            HorizontalContentAlignment="Left"
-                            Content="HealthTracker"
-                            FontSize="24"
-                            FontWeight="Bold"
-                            Foreground="{DynamicResource SecundaryBlueColor}" />
+                        <Label Style="{StaticResource NameProgramStyle}" />
                     </StackPanel>
 
 
                     <StackPanel Grid.Row="1">
                         <RadioButton
-                            x:Name="rdHone"
+                            x:Name="RadioButtonBMI"
                             Margin="0,30,0,0"
-                            Click="rdHome_Click"
+                            Click="RadioButtonBMI_Click"
                             Content="BMI"
                             Style="{DynamicResource MenuRadioButtonStyle}"
                             Tag="{DynamicResource bmi}" />
 
                         <RadioButton
-                            x:Name="rdAnalytics"
+                            x:Name="RadioButtonRecomendation"
                             Margin="0,1,0,1"
-                            Click="rdAnalytics_Click"
+                            Click="RadioButtonRecomendation_Click"
                             Content="Рекомендации"
                             Style="{DynamicResource MenuRadioButtonStyle}"
-                            Tag="{DynamicResource BMIIcon}" />
+                            Tag="{DynamicResource recomendation}" />
                         <RadioButton
-                            x:Name="rdMessages"
-                            Click="rdMessages_Click"
+                            x:Name="RadioButtonMeal"
+                            Click="RadioButtonMeal_Click"
                             Content="Питание"
                             Style="{DynamicResource MenuRadioButtonStyle}"
-                            Tag="{DynamicResource BMIIcon}" />
+                            Tag="{DynamicResource meal}" />
                         <RadioButton
-                            x:Name="rdCollections"
+                            x:Name="RadioButtonVitalSigns"
                             Margin="0,1,0,1"
-                            Click="rdCollections_Click"
+                            Click="RadioButtonVitalSigns_Click"
                             Content="Жизненные показатели"
                             Style="{DynamicResource MenuRadioButtonStyle}"
-                            Tag="{DynamicResource BMIIcon}" />
+                            Tag="{DynamicResource activity}" />
                         <RadioButton
-                            x:Name="rdUsers"
-                            Click="rdUsers_Click"
+                            x:Name="RadioButtonSleep"
+                            Click="RadioButtonSleep_Click"
                             Content="Сон"
                             Style="{DynamicResource MenuRadioButtonStyle}"
-                            Tag="{DynamicResource BMIIcon}" />
+                            Tag="{DynamicResource sleep}" />
 
-                        <Separator Margin="20,20" Background="{DynamicResource TertiaryBackgroundColor}" />
-
-                        <RadioButton
-                            x:Name="rdNotifications"
-                            Margin="0,1,0,1"
-                            Click="rdNotifications_Click"
-                            Content="Описание"
-                            Style="{DynamicResource MenuRadioButtonStyle}"
-                            Tag="{DynamicResource BMIIcon}" />
-
-
+                        <Separator Margin="20,20" Background="{DynamicResource MainAdditionalColor}" />
                     </StackPanel>
 
                     <Path
@@ -104,46 +84,19 @@
                         VerticalAlignment="Center"
                         Data="{DynamicResource information}"
                         Fill="{DynamicResource TertiaryTextColor}" />
-                    <Border
-                        Grid.Row="3"
-                        Width="110"
-                        Height="35"
-                        Margin="0,0,20,0"
-                        HorizontalAlignment="Right"
-                        Background="{DynamicResource TertiaryBackgroundColor}"
-                        CornerRadius="18">
+                    <Border Grid.Row="3" Style="{StaticResource ChangeThemeStyle}">
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Path
-                                Width="16"
-                                Height="16"
-                                VerticalAlignment="Center"
-                                Data="{DynamicResource sun}"
-                                Fill="{DynamicResource PrimaryYellowColor}"
-                                Stretch="UniformToFill" />
+                            <Path Style="{StaticResource PathSunStyle}" />
                             <ToggleButton
-                                x:Name="Themes"
+                                x:Name="ThemesToggleButton"
                                 Margin="10,0,10,0"
                                 HorizontalAlignment="Right"
                                 Click="Themes_Click"
                                 IsChecked="False"
                                 Style="{DynamicResource ToggleButtonStyle}" />
-                            <Path
-                                Width="16"
-                                Height="16"
-                                VerticalAlignment="Center"
-                                Data="{DynamicResource moon}"
-                                Fill="{DynamicResource PrimaryWhiteColor}"
-                                Stretch="Fill" />
+                            <Path Style="{StaticResource PathMoonStyle}" />
                         </StackPanel>
-                        <!--<Border.BitmapEffect>
-                        <DropShadowBitmapEffect
-                                        ShadowDepth="1"
-                                        Direction="0"
-                                        Color="#5B8DEF"
-                                        Softness="0.8"/>
-                    </Border.BitmapEffect>-->
                     </Border>
-
                 </Grid>
             </Border>
             <!--  End: GridColumn Left  -->
@@ -167,14 +120,14 @@
                         x:Name="btnClose"
                         Click="btnClose_Click"
                         Content="{DynamicResource close}"
-                        Style="{StaticResource IconButtonsStyle}"
+                        Style="{StaticResource CloseButtonsStyle}"
                         Tag="IsCloseButton" />
                     <Button
                         x:Name="btnRestore"
                         Margin="5,0"
                         Click="btnRestore_Click">
                         <Button.Style>
-                            <Style BasedOn="{StaticResource IconButtonsStyle}" TargetType="{x:Type Button}">
+                            <Style BasedOn="{StaticResource MinimazeMaximazeButtonsStyle}" TargetType="{x:Type Button}">
                                 <Setter Property="Content" Value="{DynamicResource maximize}" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
@@ -188,7 +141,7 @@
                         x:Name="btnMinimize"
                         Click="btnMinimize_Click"
                         Content="{DynamicResource minimize}"
-                        Style="{DynamicResource IconButtonsStyle}" />
+                        Style="{DynamicResource MinimazeMaximazeButtonsStyle}" />
                 </StackPanel>
                 <!--  End: Button Close | Restore | Minimize  -->
 
@@ -207,5 +160,4 @@
             </Grid>
         </Grid>
     </Border>
-
 </Window>

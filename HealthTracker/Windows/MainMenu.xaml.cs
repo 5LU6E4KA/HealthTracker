@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HealthTracker.ChangeTheme;
+using HealthTracker.Pages;
 
 namespace HealthTracker.Pages
 {
@@ -24,19 +25,19 @@ namespace HealthTracker.Pages
         public MainMenu()
         {
             InitializeComponent();
+            
         }
+
         private void Themes_Click(object sender, RoutedEventArgs e)
         {
-            if (Themes.IsChecked == true)
+            if (ThemesToggleButton.IsChecked == true)
                 ThemesController.SetTheme(ThemesController.ThemeTypes.Modern);
             else
                 ThemesController.SetTheme(ThemesController.ThemeTypes.Classic);
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+            => Close();
 
         private void btnRestore_Click(object sender, RoutedEventArgs e)
         {
@@ -47,38 +48,26 @@ namespace HealthTracker.Pages
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
+            => WindowState = WindowState.Minimized;
 
-        private void rdHome_Click(object sender, RoutedEventArgs e)
-        {
-            frameContent.Navigate(new BMIPage());
-        }
+        private void RadioButtonBMI_Click(object sender, RoutedEventArgs e)
+            => frameContent.Navigate(new BMIPage());
 
-        private void rdAnalytics_Click(object sender, RoutedEventArgs e)
-        {
-            frameContent.Navigate(new RecomendationPage());
-        }
+        private void RadioButtonRecomendation_Click(object sender, RoutedEventArgs e)
+            => frameContent.Navigate(new RecomendationPage());
 
-        private void rdMessages_Click(object sender, RoutedEventArgs e)
-        {
-            frameContent.Navigate(new MealPage());
-        }
+        private void RadioButtonMeal_Click(object sender, RoutedEventArgs e)
+            => frameContent.Navigate(new MealPage());
 
-        private void rdCollections_Click(object sender, RoutedEventArgs e)
-        {
-            frameContent.Navigate(new VitalSignsPage());
-        }
+        private void RadioButtonVitalSigns_Click(object sender, RoutedEventArgs e)
+            => frameContent.Navigate(new VitalSignsPage());
 
-        private void rdUsers_Click(object sender, RoutedEventArgs e)
-        {
-            frameContent.Navigate(new SleepPage());
-        }
+        private void RadioButtonSleep_Click(object sender, RoutedEventArgs e) 
+            => frameContent.Navigate(new SleepPage());
 
-        private void rdNotifications_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            frameContent.Navigate(new DescriptionPage());
+            ThemesToggleButton.IsChecked = ThemesController.SelectedTheme == ThemesController.ThemeTypes.Modern;
         }
     }
 }

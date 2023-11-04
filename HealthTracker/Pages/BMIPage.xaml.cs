@@ -34,11 +34,27 @@ namespace HealthTracker.Pages
         {
             try
             {
-                double weight = Convert.ToDouble(WeightTextBox.Text);
-                double height = Convert.ToDouble(HeightTextBox.Text);
+                double weight = Convert.ToDouble(WeightTextBox.Text), height = Convert.ToDouble(HeightTextBox.Text);
 
-                double bmi = weight / Math.Pow(height, 2);
-                double roundedBmi = Math.Round(bmi, 1);
+                if (height > 3)
+                {
+                    MessageBox.Show("Рост не может быть больше 3 метров.", "BMI Калькулятор");
+                    return; 
+                }
+
+                if (weight == 0 || height == 0)
+                {
+                    MessageBox.Show("Вес и рост не могут быть равны 0.", "BMI Калькулятор");
+                    return; 
+                }
+
+                if (weight > 650)
+                {
+                    MessageBox.Show("Вес не может быть больше 650 кг.", "BMI Калькулятор");
+                    return; 
+                }
+
+                double bmi = weight / Math.Pow(height, 2), roundedBmi = Math.Round(bmi, 1);
 
                 ResultBMITextBlock.Text = $"Ваш индекс массы тела: {roundedBmi}";
 

@@ -10,68 +10,35 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid >
-        <Border Background="White" CornerRadius="8" />
+    <Grid>
+        <Border Style="{StaticResource CornerPagesBorder}" />
 
-        <StackPanel
-            Width="400"
-            VerticalAlignment="Center"
-            Orientation="Vertical">
-            <Border
-                Margin="0,20,0,20"
-                BorderBrush="Black"
-                BorderThickness="1"
-                CornerRadius="30">
+        <StackPanel Style="{StaticResource StackPanelBMIStyle}">
+            <Border Style="{StaticResource BorderBMIStyle}">
                 <StackPanel>
-                    <TextBlock
-                        Height="40"
-                        Margin="0,40,0,40"
-                        FontSize="28"
-                        Text="BMI Калькулятор"
-                        TextAlignment="Center" />
-                    <TextBlock
-                        Height="40"
-                        Margin="20,40,0,0"
-                        FontSize="18"
-                        Text="Вес (кг)"
-                        TextAlignment="Left" />
+                    <TextBlock Style="{StaticResource TitleBMIStyle}" Text="BMI Калькулятор" />
+                    <TextBlock Style="{StaticResource MainDescriprionFieldsStyle}" Text="Вес (кг)" />
                     <TextBox
                         x:Name="WeightTextBox"
-                        Height="40"
-                        Margin="20,1,20,0"
                         PreviewTextInput="WeightTextBox_PreviewTextInput"
-                        TextAlignment="Left" />
-                    <TextBlock
-                        Height="40"
-                        Margin="20,40,0,0"
-                        FontSize="18"
-                        Text="Рост (м)"
-                        TextAlignment="Left" />
+                        Style="{StaticResource BMITextBoxStyle}" />
+                    <TextBlock Style="{StaticResource MainDescriprionFieldsStyle}" Text="Рост (м)" />
                     <TextBox
                         x:Name="HeightTextBox"
-                        Height="40"
-                        Margin="20,1,20,0"
                         PreviewTextInput="HeightTextBox_PreviewTextInput"
-                        TextAlignment="Left" />
+                        Style="{StaticResource BMITextBoxStyle}" />
                     <Button
-                        Height="40"
-                        Margin="0,40,0,0"
-                        HorizontalAlignment="Center"
                         Click="Button_Click"
-                        Content="Рассчитать" />
+                        Content="Рассчитать"
+                        Style="{StaticResource CalculateButtonStyle}" />
                     <TextBlock
                         x:Name="ResultBMITextBlock"
-                        Width="250"
-                        Height="40"
                         Margin="0,40,0,0"
-                        Text="" />
+                        Style="{StaticResource ResultsBMITextBlockStyle}" />
                     <TextBlock
                         x:Name="GeneralizationBMITextBlock"
-                        Width="250"
-                        Height="40"
                         Margin="0,10,0,20"
-                        Text="" />
-
+                        Style="{StaticResource ResultsBMITextBlockStyle}" />
                 </StackPanel>
             </Border>
         </StackPanel>

@@ -11,4 +11,47 @@
         <Setter Property="Foreground" Value="#000000" />
     </Style>
 
+    <Style x:Key="BMITextBoxStyle" TargetType="TextBox">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Margin" Value="20,1,20,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <!--  Выравнивание текста по всей высоте  -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3"
+                            Opacity="3">
+                            <Grid>
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    Margin="0"
+                                    Padding="{TemplateBinding Padding}"
+                                    BorderThickness="0"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    IsTabStop="False" />
+                                <Border
+                                    Margin="0,0,0,-1"
+                                    BorderBrush="{DynamicResource AccentColor}"
+                                    BorderThickness="1,1,1,1"
+                                    CornerRadius="3" />
+                                <Border
+                                    Margin="0,0,0,-1"
+                                    BorderBrush="{DynamicResource AccentColor}"
+                                    BorderThickness="2,2,2,2"
+                                    CornerRadius="1" />
+                                <Border x:Name="Outer" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

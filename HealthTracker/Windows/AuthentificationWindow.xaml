@@ -21,35 +21,30 @@
             <ColumnDefinition Width="25" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Style="{StaticResource FirstHalfAuthentificationStyle }" />
+        <Grid Grid.Column="0" Style="{StaticResource FirstHalfAuthentificationStyle}" />
         <Grid
             Grid.Row="1"
             Grid.Column="0"
             Style="{StaticResource FirstHalfAuthentificationStyle}" />
 
         <Grid Grid.Column="4" Style="{StaticResource SecondHalfAuthentificationStyle}" />
-        <Frame
-            Name="MainContentFrame"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="4"
-            NavigationUIVisibility="Hidden" />
+
 
         <Button
             x:Name="ButtonMinimaze"
             Grid.Column="2"
-            Content="{DynamicResource minimize}"
             Click="ButtonMinimaze_Click"
-            Style="{DynamicResource IconButtonsStyle}" />
+            Content="{DynamicResource minimize}"
+            Style="{DynamicResource MinimazeMaximazeButtonsStyle}" />
 
         <Button
             x:Name="ButtonClose"
             Grid.Column="3"
             Click="ButtonClose_Click"
             Content="{DynamicResource close}"
-            Style="{DynamicResource IconButtonsStyle}"
-            Tag="Isclo" Cursor="Hand"/>
+            Cursor="Hand"
+            Style="{DynamicResource CloseButtonsStyle}"
+            Tag="Isclo" />
 
         <StackPanel
             x:Name="StackPanelLogoText"
@@ -57,7 +52,10 @@
             Grid.Column="0"
             Style="{StaticResource StackPanelLogoTextStyle}">
 
-            <Image x:Name="IconHealth" Style="{DynamicResource HeaderIcon}" Margin="15" />
+            <Image
+                x:Name="IconHealth"
+                Margin="15"
+                Style="{DynamicResource HeaderIcon}" />
 
             <TextBlock x:Name="NameProgramProduct" Style="{StaticResource NameProgramProductStyle}" />
 

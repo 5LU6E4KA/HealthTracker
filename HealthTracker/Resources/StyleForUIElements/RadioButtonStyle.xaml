@@ -75,12 +75,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource SecundaryTextColor}" />
                             <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource SecundaryTextColor}" />
-                            <Setter TargetName="btnSelected" Property="Background" Value="{DynamicResource TertiaryBackgroundColor}" />
+                            <Setter TargetName="btnSelected" Property="Background" Value="{DynamicResource MainAdditionalColor}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource TertiaryTextColor}" />
-                            <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource SecundaryBlueColor}" />
-                            <Setter TargetName="btnSelected" Property="Background" Value="{DynamicResource TertiaryBackgroundColor}" />
+                            <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource PercentMinusColor}" />
+                            <Setter TargetName="btnSelected" Property="Background" Value="{DynamicResource MainAdditionalColor}" />
                             <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource TertiaryTextColor}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -121,7 +121,7 @@
                             Height="20"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Fill="{DynamicResource TertiaryWhiteColor}"
+                            Fill="{DynamicResource MainAdditionalColor}"
                             Stroke="{TemplateBinding BorderBrush}"
                             StrokeThickness="3">
                             <!--  Optional  -->
@@ -167,7 +167,7 @@
                         </EventTrigger>
 
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="{DynamicResource SecundaryBlueColor}" />
+                            <Setter TargetName="Ellipse" Property="Fill" Value="{DynamicResource PercentMinusColor}" />
                             <Setter TargetName="Ellipse" Property="Stroke" Value="{DynamicResource PrimaryTextColor}" />
                         </Trigger>
                     </ControlTemplate.Triggers>

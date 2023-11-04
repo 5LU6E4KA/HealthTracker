@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,40 +10,32 @@ namespace HealthTracker.ChangeTheme
 {
     public static class ThemesController
     {
-        public static ThemeTypes CurrentTheme { get; set; }
+        public static ThemeTypes SelectedTheme { get; set; }
 
         public enum ThemeTypes
         {
             Classic, Modern
         }
 
-        public static ResourceDictionary ThemeDictionary
-        {
-            get { return Application.Current.Resources.MergedDictionaries[0]; }
-            set { Application.Current.Resources.MergedDictionaries[0] = value; }
-        }
-
         private static void ChangeTheme(Uri uri)
         {
-            ThemeDictionary = new ResourceDictionary() { Source = uri };
+            ResourceDictionary dictionary = (ResourceDictionary)Application.LoadComponent(resourceLocator: uri);
+            Application.Current.Resources.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(item: dictionary);
+
         }
 
         public static void SetTheme(ThemeTypes theme)
         {
-            string themeName = null;
-            CurrentTheme = theme;
-            switch (theme)
-            {
-                case ThemeTypes.Modern: themeName = "ModernTheme"; break;
-                case ThemeTypes.Classic: themeName = "ClassicTheme"; break;
-            }
+            Config.SelectedTheme = theme.ToString();
+            SelectedTheme = theme;
 
             try
             {
-                if (!string.IsNullOrEmpty(themeName))
-                    ChangeTheme(new Uri($"ChangeTheme/{themeName}.xaml", UriKind.Relative));
+                ChangeTheme(new Uri($"/Resources/Themes/{SelectedTheme.ToString()}Theme.xaml", UriKind.Relative));
             }
             catch { }
+
         }
     }
 }

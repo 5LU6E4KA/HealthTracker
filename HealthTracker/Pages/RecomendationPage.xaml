@@ -10,51 +10,48 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-   <Grid>
-    <Border Background="White" CornerRadius="8" />
+    <Grid>
+        <Border Style="{DynamicResource CornerPagesBorder}" />
 
-    <StackPanel Margin="10" Orientation="Vertical">
-        <Label
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Content="Рекомендации укрепления здоровья"
-            FontSize="30"
-            FontWeight="Bold"
-            Foreground="{DynamicResource PrimaryTextColor}" />
+        <StackPanel Margin="10" Orientation="Vertical">
+            <TextBlock Style="{StaticResource TitleRecomendationStyle}" Text="Рекомендации укрепления здоровья" />
 
-        <!--  Expander для питания  -->
-        <Expander Header="Питание" FontSize="18" Margin="0 5">
-            <StackPanel>
-                <TextBlock Text="Рекомендация 1: Следите за балансом калорий." FontSize="16" />
-                <TextBlock Text="Рекомендация 2: Употребляйте разнообразные продукты." FontSize="16" />
-                <TextBlock Text="Рекомендация 3: Ограничьте потребление сахара и соли." FontSize="16" />
-                <TextBlock Text="Рекомендация 4: Употребляйте достаточное количество воды." FontSize="16" />
-                <TextBlock Text="Рекомендация 5: Соблюдайте режим питания и не пропускайте приемы пищи." FontSize="16" />
-            </StackPanel>
-        </Expander>
+            <!--  Expander для питания  -->
+            <Expander Header="Питание" Style="{StaticResource RecomendationExpander}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="1. Следите за балансом калорий." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="2. Употребляйте разнообразные продукты." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="3. Ограничьте потребление сахара и соли." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="4. Употребляйте достаточное количество воды." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="5. Соблюдайте режим питания и не пропускайте приемы пищи." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="6. Включите в рацион свежие фрукты и овощи." />
+                </StackPanel>
+            </Expander>
 
-        <!--  Expander для жизненных показателей  -->
-        <Expander Header="Жизненные показатели" FontSize="18" Margin="0 5">
-            <StackPanel>
-                <TextBlock Text="Рекомендация 1: Поддерживайте нормальную температуру тела." FontSize="16" />
-                <TextBlock Text="Рекомендация 2: Контролируйте пульс и сердечный ритм." FontSize="16" />
-                <TextBlock Text="Рекомендация 3: Измеряйте артериальное давление." FontSize="16" />
-                <TextBlock Text="Рекомендация 4: Записывайте важные жизненные показатели в систему." FontSize="16" />
-                <TextBlock Text="Рекомендация 5: Посещайте врача для профилактических осмотров." FontSize="16" />
-            </StackPanel>
-        </Expander>
+            <!--  Expander для жизненных показателей  -->
+            <Expander Header="Жизненные показатели" Style="{StaticResource RecomendationExpander}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="1. Поддерживайте нормальную температуру тела." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="2. Контролируйте пульс и сердечный ритм." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="3. Измеряйте артериальное давление." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="4. Записывайте важные жизненные показатели в систему." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="5. Посещайте врача для профилактических осмотров." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="6. Поддерживайте активный образ жизни." />
+                </StackPanel>
+            </Expander>
 
-        <!--  Expander для сна  -->
-        <Expander Header="Сон" FontSize="18" Margin="0 5">
-            <StackPanel>
-                <TextBlock Text="Рекомендация 1: Создайте комфортные условия для сна." FontSize="16" />
-                <TextBlock Text="Рекомендация 2: Соблюдайте регулярный режим сна." FontSize="16" />
-                <TextBlock Text="Рекомендация 3: Избегайте употребления кофе и алкоголя перед сном." FontSize="16" />
-                <TextBlock Text="Рекомендация 4: Расслабьтесь перед сном, например, с помощью медитации." FontSize="16" />
-                <TextBlock Text="Рекомендация 5: Обращайтесь к специалисту, если есть проблемы со сном." FontSize="16" />
-            </StackPanel>
-        </Expander>
+            <!--  Expander для сна  -->
+            <Expander Header="Сон" Style="{StaticResource RecomendationExpander}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="1. Создайте комфортные условия для сна." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="2. Соблюдайте регулярный режим сна." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="3. Избегайте употребления кофе и алкоголя перед сном." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="4. Избегайте тяжелой и обильной пищи перед сном." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="5. Обращайтесь к специалисту, если есть проблемы со сном." />
+                    <TextBlock Style="{StaticResource NestedTextBlockStyle}" Text="6. Поддерживайте тишину и комфорт в спальной комнате." />
+                </StackPanel>
+            </Expander>
 
-    </StackPanel>
-</Grid>
+        </StackPanel>
+    </Grid>
 </Page>
