@@ -69,5 +69,10 @@ namespace HealthTracker.Pages
         {
             ThemesToggleButton.IsChecked = ThemesController.SelectedTheme == ThemesController.ThemeTypes.Modern;
         }
+
+        private void InformationButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("ОТдых");
+        }
     }
 }
