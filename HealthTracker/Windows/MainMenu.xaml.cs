@@ -71,8 +71,7 @@ namespace HealthTracker.Pages
         }
 
         private void InformationButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("ОТдых");
-        }
+        => frameContent.Navigate(new HandBookPage());
+
     }
 }

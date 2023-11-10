@@ -5,21 +5,194 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HealthTracker.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:oxy="http://oxyplot.org/wpf"
     Title="MealPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid>
-        <Border Background="White" CornerRadius="8">
-            <Label
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Content="Питание"
-                FontSize="50"
-                FontWeight="Bold"
-                Foreground="{DynamicResource PrimaryTextColor}" />
-        </Border>
+    <ScrollViewer>
+        <Grid>
+            <Border Style="{DynamicResource CornerPagesBorder}" />
 
-    </Grid>
+            <StackPanel Margin="10" Orientation="Vertical">
+
+                <Expander Header="Полученные калории" Style="{StaticResource RecomendationExpander}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <ListView
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Stretch">
+                            <ListViewItem>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Text="За последние 7 дней" />
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        HorizontalAlignment="Left"
+                                        Orientation="Horizontal">
+                                        <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                                            <TextBlock Text="1300 Cal" />
+                                            <TextBlock Text="Сегодня" />
+                                        </StackPanel>
+                                        <oxy:PlotView Margin="30,0,0,0" />
+                                    </StackPanel>
+                                </Grid>
+                            </ListViewItem>
+                        </ListView>
+
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,20,0,0"
+                            Orientation="Horizontal">
+                            <TextBlock Text="Прием пищи" />
+                            <ComboBox
+                                x:Name="EatingComboBox"
+                                Width="200"
+                                ItemsSource="{Binding Eating}" />
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,20,0,0"
+                            Orientation="Horizontal">
+                            <TextBlock Text="Продукт питания" />
+                            <TextBox
+                                x:Name="FoodProductTextBox"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Width="200" />
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,20,0,0"
+                            Orientation="Horizontal">
+                            <TextBlock Text="Углеводы" />
+                            <TextBox
+                                x:Name="CarbohydratesTextBox"
+                                Grid.Row="1"
+                                Grid.Column="0" />
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="0,20,0,0"
+                            Orientation="Horizontal">
+                            <TextBlock Text="Белки" />
+                            <TextBox
+                                x:Name="ProteinTextBox"
+                                Grid.Row="1"
+                                Grid.Column="0" />
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,20,0,0"
+                            Orientation="Horizontal">
+                            <TextBlock Text="Сахар" />
+                            <TextBox
+                                x:Name="SugarTextBox"
+                                Grid.Row="1"
+                                Grid.Column="0" />
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="0,20,0,0"
+                            Orientation="Horizontal">
+                            <TextBlock Text="Жиры" />
+                            <TextBox
+                                x:Name="FatsTextBox"
+                                Grid.Row="1"
+                                Grid.Column="0" />
+                        </StackPanel>
+
+                       
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Grid.Row="4"
+                            Grid.ColumnSpan="2"
+                            Margin="0,20,0,0"
+                            Orientation="Horizontal">
+                            <TextBlock Text="Полученные калории" />
+                            <TextBox
+                                x:Name="CarloriesGainedTextBox"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2" />
+                        </StackPanel>
+
+                        <Button
+                            Grid.Row="5"
+                            Grid.ColumnSpan="2"
+                            Click="ButtonSave_Click"
+                            Content="Сохранить" />
+
+                    </Grid>
+                </Expander>
+
+                <Expander Header="Уровень жидкости" Style="{StaticResource RecomendationExpander}">
+                    <StackPanel>
+                        <ListView Width="700" HorizontalAlignment="Left">
+                            <ListViewItem>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50" />
+                                        <RowDefinition Height="50" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Text="За последние 7 дней" />
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Width="100"
+                                        HorizontalAlignment="Left"
+                                        Orientation="Horizontal">
+                                        <StackPanel
+                                            Width="150"
+                                            HorizontalAlignment="Left"
+                                            Orientation="Vertical">
+                                            <TextBlock Text="1300 Cal" />
+                                            <TextBlock Text="Сегодня" />
+                                        </StackPanel>
+
+                                        <oxy:PlotView Width="140" Height="40" />
+
+
+
+                                    </StackPanel>
+                                </Grid>
+                            </ListViewItem>
+                        </ListView>
+                    </StackPanel>
+                </Expander>
+
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

@@ -79,12 +79,13 @@
 
                     <Button
                         Grid.Row="3"
-                        Margin="20,10,0,0"
+                        Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Click="InformationButton_Click"
                         Content="{DynamicResource information}"
-                        Style="{StaticResource InformationButtonStyle}" />
+                        Style="{StaticResource InformationButtonStyle}"
+                        ToolTip="Справочная система" />
                     <Border Grid.Row="3" Style="{StaticResource ChangeThemeStyle}">
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Path Style="{StaticResource PathSunStyle}" />
