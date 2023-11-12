@@ -14,6 +14,11 @@ namespace HealthTracker
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1FpRGFGfV5yd0VEallXTnJaUj0eQnxTdEZiWH5ccXBQQGRZWE1/Xw==");
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
             ThemesController.ThemeTypes SelectedTheme;
@@ -21,6 +26,7 @@ namespace HealthTracker
             else SelectedTheme = ThemesController.ThemeTypes.Modern;
             ThemesController.SetTheme(SelectedTheme);
             base.OnStartup(e);
+            
         }
     }
 }

@@ -26,36 +26,30 @@ namespace HealthTracker.Pages
             EatingComboBox.SelectedIndex = 0;
             FluidType = fluidType;
             FluidTypeComboBox.SelectedIndex = 0;
-            //UpdateDate();
-            ChartCalories.ChartAreas.Add(new ChartArea("Main"));
-            var currentSeries = new Series("Калории")
-            {
-                IsValueShownAsLabel = true
-            };
-            ChartCalories.Series.Add(currentSeries);
-            ChartCalories.BackColor = System.Drawing.Color.Transparent;
-            UpdateChart();
+           
             DataContext = this;
         }
 
-        private void UpdateChart()
-        {
-            var info = DatabaseContext.DBContext.Context.FoodInformations.ToList()
-              .Where(x => x.MealTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
 
 
-            Series currentSeries = ChartCalories.Series.FirstOrDefault();
-            currentSeries.ChartType = SeriesChartType.Column;
-            currentSeries.Points.Clear();
+        //private void UpdateChart()
+        //{
+        //    var info = DatabaseContext.DBContext.Context.FoodInformations.ToList()
+        //      .Where(x => x.MealTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
 
-            foreach (var category in dayOfWeeks)
-            {
-                var calories = info.Where(x => x.MealTime.Value.DayOfWeek == category.Key);
-                var cal = calories.Count() == 0 ? 0 : calories.First().AmountOfCalories;
-                currentSeries.Points.AddXY(category.Value, cal);
-            }
-            ChartCalories.Update();
-        }
+
+        //    Series currentSeries = ChartCalories.Series.FirstOrDefault();
+        //    currentSeries.ChartType = SeriesChartType.Column;
+        //    currentSeries.Points.Clear();
+
+        //    foreach (var category in dayOfWeeks)
+        //    {
+        //        var calories = info.Where(x => x.MealTime.Value.DayOfWeek == category.Key);
+        //        var cal = calories.Count() == 0 ? 0 : calories.First().AmountOfCalories;
+        //        currentSeries.Points.AddXY(category.Value, cal);
+        //    }
+        //    ChartCalories.Update();
+        //}
 
         //private void UpdateDate()
         //{
