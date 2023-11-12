@@ -39,18 +39,17 @@
                 <Expander Header="Контакты" Style="{StaticResource RecomendationExpander}">
                     <StackPanel>
                         <TextBlock>
-                            GitHub: <Hyperlink NavigateUri="https://github.com/5LU6E4KA/HealthTracker" RequestNavigate="Hyperlink_RequestNavigate">
+                            GitHub:<Hyperlink NavigateUri="https://github.com/5LU6E4KA/HealthTracker" RequestNavigate="Hyperlink_RequestNavigate">
                                 https://github.com/5LU6E4KA/HealthTracker
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock>
-                            Telegram: <Hyperlink NavigateUri="https://t.me/Dmitry13890" RequestNavigate="Hyperlink_RequestNavigate">
+                            Telegram:<Hyperlink NavigateUri="https://t.me/Dmitry13890" RequestNavigate="Hyperlink_RequestNavigate">
                                 https://t.me/Dmitry13890
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock>
-                            Gmail: 
-                            <Hyperlink NavigateUri="mailto:vitalevd.2004@gmail.com" RequestNavigate="Hyperlink_RequestNavigate">
+                            Gmail:<Hyperlink NavigateUri="mailto:vitalevd.2004@gmail.com" RequestNavigate="Hyperlink_RequestNavigate">
                                 vitalevd.2004@gmail.com
                             </Hyperlink>
                         </TextBlock>
@@ -59,4 +58,5 @@
 
             </StackPanel>
         </Grid>
-  
+    </ScrollViewer>
+</Page>

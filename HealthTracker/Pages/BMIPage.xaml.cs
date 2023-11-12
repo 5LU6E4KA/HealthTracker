@@ -89,7 +89,6 @@ namespace HealthTracker.Pages
             }
             catch (FormatException)
             {
-                // Обработка ошибки преобразования пустой строки в double
                 MessageBox.Show("Пожалуйста, введите числовые значения в поля.", "BMI Калькулятор");
             }
         }
@@ -100,7 +99,7 @@ namespace HealthTracker.Pages
             return double.TryParse(text, out result);
         }
 
-        private void HeightTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!IsNumeric(e.Text) && e.Text != ",")
             {
@@ -108,12 +107,6 @@ namespace HealthTracker.Pages
             }
         }
 
-        private void WeightTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!IsNumeric(e.Text) && e.Text != ",")
-            {
-                e.Handled = true;
-            }
-        }
+       
     }
 }

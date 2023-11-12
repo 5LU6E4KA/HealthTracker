@@ -20,12 +20,12 @@
                     <TextBlock Style="{StaticResource MainDescriprionFieldsStyle}" Text="Вес (кг)" />
                     <TextBox
                         x:Name="WeightTextBox"
-                        PreviewTextInput="WeightTextBox_PreviewTextInput"
+                        PreviewTextInput="TextBox_PreviewTextInput"
                         Style="{StaticResource BMITextBoxStyle}" />
                     <TextBlock Style="{StaticResource MainDescriprionFieldsStyle}" Text="Рост (м)" />
                     <TextBox
                         x:Name="HeightTextBox"
-                        PreviewTextInput="HeightTextBox_PreviewTextInput"
+                        PreviewTextInput="TextBox_PreviewTextInput"
                         Style="{StaticResource BMITextBoxStyle}" />
                     <Button
                         Click="Button_Click"

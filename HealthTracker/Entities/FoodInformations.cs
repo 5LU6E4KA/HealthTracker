@@ -21,7 +21,7 @@ namespace HealthTracker.Entities
         }
     
         public int FoodInformationID { get; set; }
-        public Nullable<System.TimeSpan> MealTime { get; set; }
+        public Nullable<System.DateTime> MealTime { get; set; }
         public string Intake { get; set; }
         public string FoodProduct { get; set; }
         public decimal AmountOfCalories { get; set; }

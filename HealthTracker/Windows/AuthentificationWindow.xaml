@@ -71,7 +71,11 @@
 
             <TextBlock x:Name="LoginTextBlock" Style="{StaticResource LoginTextBlockStyle}" />
 
-            <TextBox x:Name="LoginTextBox" Style="{StaticResource LoginTextBoxStyle}" />
+            <TextBox
+                x:Name="LoginTextBox"
+                Margin="50,0,0,0"
+                FontSize="14"
+                Style="{StaticResource LoginTextBoxStyle}" />
 
             <TextBlock x:Name="PasswordTextBlock" Style="{StaticResource PasswordTextBlockStyle}" />
 
@@ -80,7 +84,11 @@
             <Button
                 x:Name="SignInButton"
                 Click="SignInButton_Click"
-                Style="{StaticResource SignInButtonStyle}" />
+                Style="{StaticResource SignInButtonStyle}"
+                Margin="50,50,0,0"
+                Content="Войти"
+                Width="150"
+                Height="50"/>
 
             <StackPanel x:Name="StackPanelActionSelection" Style="{StaticResource StackPanelActionSelectionStyle}">
 

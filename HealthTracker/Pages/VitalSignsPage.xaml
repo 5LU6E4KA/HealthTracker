@@ -10,16 +10,173 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid>
-        <Border Background="White" CornerRadius="8">
-            <Label
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Content="Жизненные показатели"
-                FontSize="50"
-                FontWeight="Bold"
-                Foreground="{DynamicResource PrimaryTextColor}" />
-        </Border>
+    <ScrollViewer>
+        <Grid>
+            <Border Style="{DynamicResource CornerPagesBorder}" />
 
-    </Grid>
+            <StackPanel Margin="10" Orientation="Vertical">
+
+                <Expander Header="Пульс" Style="{StaticResource RecomendationExpander}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <ListView
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,20" />
+
+                        <DockPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,70,0"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Пульс" />
+                            <TextBox MinWidth="160" MaxWidth="5000" />
+                        </DockPanel>
+
+
+                        <Button
+                            Grid.Row="5"
+                            Grid.ColumnSpan="2"
+                            Width="100"
+                            Height="40"
+                            HorizontalAlignment="Center" />
+
+                        <ListView
+                            Grid.Row="6"
+                            Grid.ColumnSpan="2"
+                            Margin="0,20,0,10" />
+
+
+                    </Grid>
+                </Expander>
+
+                <Expander Header="Артериальное давление" Style="{StaticResource RecomendationExpander}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+
+                        </Grid.RowDefinitions>
+
+                        <ListView
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,20" />
+
+                        <DockPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,70,0"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Тип жидкости" />
+                            <TextBox MinWidth="160" MaxWidth="5000" />
+                        </DockPanel>
+
+                        <DockPanel
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,30,20"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Уровень жидкости" />
+                            <TextBox MinWidth="180" />
+                        </DockPanel>
+
+
+                        <Button
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Width="100"
+                            Height="40"
+                            HorizontalAlignment="Center" />
+
+                        <ListView
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            Margin="0,20,0,10" />
+
+
+                    </Grid>
+                </Expander>
+
+                <Expander Header="Температура тела" Style="{StaticResource RecomendationExpander}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+
+                        </Grid.RowDefinitions>
+
+                        <ListView
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,20" />
+
+                        <DockPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,70,0"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Температура тела" />
+                            <TextBox MinWidth="160" MaxWidth="5000" />
+                        </DockPanel>
+
+                        <DockPanel
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,30,20"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Место измерения" />
+                            <TextBox MinWidth="180" />
+                        </DockPanel>
+
+
+                        <Button
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Width="100"
+                            Height="40"
+                            HorizontalAlignment="Center" />
+
+                        <ListView
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            Margin="0,20,0,10" />
+
+
+                    </Grid>
+                </Expander>
+
+
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

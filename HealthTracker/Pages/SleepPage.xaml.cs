@@ -24,5 +24,10 @@ namespace HealthTracker.Pages
         {
             InitializeComponent();
         }
+
+        private void ButtonSaveSleep_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

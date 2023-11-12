@@ -2,7 +2,9 @@
     x:Class="HealthTracker.Pages.MealPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
     xmlns:local="clr-namespace:HealthTracker.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:oxy="http://oxyplot.org/wpf"
@@ -10,7 +12,6 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-
     <ScrollViewer>
         <Grid>
             <Border Style="{DynamicResource CornerPagesBorder}" />
@@ -20,175 +21,229 @@
                 <Expander Header="Полученные калории" Style="{StaticResource RecomendationExpander}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
+
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
 
                         <ListView
                             Grid.Row="0"
                             Grid.Column="0"
-                            Grid.ColumnSpan="2"
-                            VerticalAlignment="Stretch"
-                            VerticalContentAlignment="Stretch">
-                            <ListViewItem>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
+                            Margin="0,0,0,20" />
+                        <WindowsFormsHost
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Width="300"
+                            Height="300">
+                            <charts:Chart x:Name="ChartCalories" />
+                        </WindowsFormsHost>
+                        <!--<oxy:PlotView
+                            x:Name="Grafic"
+                            Grid.Row="0"
+                            Grid.Column="1" />-->
 
-                                    <TextBlock Grid.Row="0" Text="За последние 7 дней" />
-                                    <StackPanel
-                                        Grid.Row="1"
-                                        HorizontalAlignment="Left"
-                                        Orientation="Horizontal">
-                                        <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
-                                            <TextBlock Text="1300 Cal" />
-                                            <TextBlock Text="Сегодня" />
-                                        </StackPanel>
-                                        <oxy:PlotView Margin="30,0,0,0" />
-                                    </StackPanel>
-                                </Grid>
-                            </ListViewItem>
-                        </ListView>
 
-                        <StackPanel
+                        <DockPanel
                             Grid.Row="1"
                             Grid.Column="0"
-                            Margin="0,20,0,0"
-                            Orientation="Horizontal">
-                            <TextBlock Text="Прием пищи" />
+                            Margin="0,0,70,0"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Прием пищи" />
                             <ComboBox
                                 x:Name="EatingComboBox"
-                                Width="200"
-                                ItemsSource="{Binding Eating}" />
-                        </StackPanel>
+                                MinWidth="160"
+                                MaxWidth="5000"
+                                ItemsSource="{Binding Eating}"
+                                Style="{StaticResource ComboBoxStyle}" />
+                        </DockPanel>
 
-                        <StackPanel
+                        <DockPanel
                             Grid.Row="1"
                             Grid.Column="1"
-                            Margin="0,20,0,0"
-                            Orientation="Horizontal">
-                            <TextBlock Text="Продукт питания" />
+                            Margin="0,0,30,0"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Продукт питания" />
                             <TextBox
                                 x:Name="FoodProductTextBox"
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Width="200" />
-                        </StackPanel>
+                                MinWidth="180"
+                                PreviewTextInput="LettersOnlyTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                TextAlignment="Center" />
+                        </DockPanel>
 
-                        <StackPanel
+                        <DockPanel
                             Grid.Row="2"
                             Grid.Column="0"
-                            Margin="0,20,0,0"
-                            Orientation="Horizontal">
-                            <TextBlock Text="Углеводы" />
+                            Margin="0,10,70,0"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Углеводы" />
                             <TextBox
                                 x:Name="CarbohydratesTextBox"
-                                Grid.Row="1"
-                                Grid.Column="0" />
-                        </StackPanel>
+                                MinWidth="188"
+                                MaxLength="5"
+                                PreviewTextInput="NumericTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                Text="0"
+                                TextAlignment="Center" />
+                        </DockPanel>
 
-                        <StackPanel
+                        <DockPanel
                             Grid.Row="2"
                             Grid.Column="1"
-                            Margin="0,20,0,0"
-                            Orientation="Horizontal">
-                            <TextBlock Text="Белки" />
+                            Margin="0,10,30,0"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Белки" />
                             <TextBox
                                 x:Name="ProteinTextBox"
-                                Grid.Row="1"
-                                Grid.Column="0" />
-                        </StackPanel>
+                                MinWidth="273"
+                                MaxLength="5"
+                                PreviewTextInput="NumericTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                Text="0"
+                                TextAlignment="Center" />
+                        </DockPanel>
 
-                        <StackPanel
+                        <DockPanel
                             Grid.Row="3"
                             Grid.Column="0"
-                            Margin="0,20,0,0"
-                            Orientation="Horizontal">
-                            <TextBlock Text="Сахар" />
+                            Margin="0,10,70,0"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Сахар" />
                             <TextBox
                                 x:Name="SugarTextBox"
-                                Grid.Row="1"
-                                Grid.Column="0" />
-                        </StackPanel>
+                                MinWidth="218"
+                                MaxLength="5"
+                                PreviewTextInput="NumericTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                Text="0"
+                                TextAlignment="Center" />
+                        </DockPanel>
 
-                        <StackPanel
+                        <DockPanel
                             Grid.Row="3"
                             Grid.Column="1"
-                            Margin="0,20,0,0"
-                            Orientation="Horizontal">
-                            <TextBlock Text="Жиры" />
+                            Margin="0,10,30,0"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Жиры" />
                             <TextBox
                                 x:Name="FatsTextBox"
-                                Grid.Row="1"
-                                Grid.Column="0" />
-                        </StackPanel>
+                                MinWidth="272"
+                                MaxLength="5"
+                                PreviewTextInput="NumericTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                Text="0"
+                                TextAlignment="Center" />
+                        </DockPanel>
 
-                       
-                        <StackPanel
-                            HorizontalAlignment="Center"
+                        <DockPanel
                             Grid.Row="4"
                             Grid.ColumnSpan="2"
-                            Margin="0,20,0,0"
-                            Orientation="Horizontal">
-                            <TextBlock Text="Полученные калории" />
+                            Margin="0,10,0,20"
+                            HorizontalAlignment="Center">
+                            <Label Content="Полученные калории" />
                             <TextBox
                                 x:Name="CarloriesGainedTextBox"
-                                Grid.Row="1"
-                                Grid.ColumnSpan="2" />
-                        </StackPanel>
+                                MinWidth="215"
+                                HorizontalAlignment="Stretch"
+                                MaxLength="6"
+                                PreviewTextInput="NumericTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                TextAlignment="Center" />
+                        </DockPanel>
 
                         <Button
                             Grid.Row="5"
                             Grid.ColumnSpan="2"
-                            Click="ButtonSave_Click"
-                            Content="Сохранить" />
+                            Width="150"
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            Click="ButtonSaveCalories_Click"
+                            Content="Сохранить"
+                            Style="{StaticResource SignInButtonStyle}" />
+
+                        <ListView
+                            Grid.Row="6"
+                            Grid.ColumnSpan="2"
+                            Margin="0,20,0,10" />
+
 
                     </Grid>
                 </Expander>
-
                 <Expander Header="Уровень жидкости" Style="{StaticResource RecomendationExpander}">
-                    <StackPanel>
-                        <ListView Width="700" HorizontalAlignment="Left">
-                            <ListViewItem>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="50" />
-                                        <RowDefinition Height="50" />
-                                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Row="0" Text="За последние 7 дней" />
-                                    <StackPanel
-                                        Grid.Row="1"
-                                        Width="100"
-                                        HorizontalAlignment="Left"
-                                        Orientation="Horizontal">
-                                        <StackPanel
-                                            Width="150"
-                                            HorizontalAlignment="Left"
-                                            Orientation="Vertical">
-                                            <TextBlock Text="1300 Cal" />
-                                            <TextBlock Text="Сегодня" />
-                                        </StackPanel>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
 
-                                        <oxy:PlotView Width="140" Height="40" />
+                        </Grid.RowDefinitions>
+
+                        <ListView
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,20" />
+
+                        <DockPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,30,20"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Тип жидкости" />
+                            <ComboBox
+                                x:Name="FluidTypeComboBox"
+                                MinWidth="160"
+                                MaxWidth="5000"
+                                ItemsSource="{Binding FluidType}"
+                                Style="{StaticResource ComboBoxStyle}" />
+                        </DockPanel>
 
 
+                        <DockPanel
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,30,20"
+                            HorizontalAlignment="Stretch">
+                            <Label Content="Уровень жидкости" />
+                            <TextBox
+                                MinWidth="180"
+                                MaxLength="6"
+                                PreviewTextInput="NumericTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                TextAlignment="Center" />
+                        </DockPanel>
 
-                                    </StackPanel>
-                                </Grid>
-                            </ListViewItem>
-                        </ListView>
-                    </StackPanel>
+
+                        <Button
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Width="150"
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            Content="Сохранить"
+                            Style="{StaticResource SignInButtonStyle}" />
+
+                        <ListView
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            Margin="0,20,0,10" />
+
+
+                    </Grid>
                 </Expander>
 
 

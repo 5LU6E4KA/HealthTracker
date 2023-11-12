@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="27fed867d4384853a724f4d9b274d4fa" Name="Diagram1">
+      <Diagram DiagramId="cc9ecc0fb36f464b868235ce630ed82f" Name="Diagram1">
         <EntityTypeShape EntityType="HealthTrackerModel.BloodPressureInformations" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HealthTrackerModel.FoodInformations" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HealthTrackerModel.Meals" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />

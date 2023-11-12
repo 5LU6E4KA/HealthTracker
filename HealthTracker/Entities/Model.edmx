@@ -20,7 +20,7 @@
             <PropertyRef Name="FoodInformationID" />
           </Key>
           <Property Name="FoodInformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MealTime" Type="time" Precision="7" />
+          <Property Name="MealTime" Type="datetime" />
           <Property Name="Intake" Type="nvarchar" MaxLength="30" />
           <Property Name="FoodProduct" Type="nvarchar" MaxLength="150" />
           <Property Name="AmountOfCalories" Type="decimal" Precision="5" Scale="1" Nullable="false" />
@@ -286,7 +286,7 @@
             <PropertyRef Name="FoodInformationID" />
           </Key>
           <Property Name="FoodInformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MealTime" Type="Time" Precision="7" />
+          <Property Name="MealTime" Type="DateTime" Precision="3" />
           <Property Name="Intake" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="FoodProduct" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="AmountOfCalories" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
