@@ -24,5 +24,15 @@ namespace HealthTracker.Pages
         {
             InitializeComponent();
         }
+
+        private void ButtonSavePulse_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonSavePressure_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

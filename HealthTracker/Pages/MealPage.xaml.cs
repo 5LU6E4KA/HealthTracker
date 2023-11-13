@@ -4,21 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Input;
+
 
 
 namespace HealthTracker.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для MealPage.xaml
-    /// </summary>
+    
+    public class Cal
+    {
+        public string Day { get; set; }
+        public double Calories { get; set; }
+    }
+
     public partial class MealPage : Page
     {
         public List<string> Eating { get; set; }
         public List<string> FluidType { get; set; }
         public List<string> DayOfWeeks { get; set; }
-
+        
         public MealPage()
         {
             InitializeComponent();
@@ -26,69 +30,22 @@ namespace HealthTracker.Pages
             EatingComboBox.SelectedIndex = 0;
             FluidType = fluidType;
             FluidTypeComboBox.SelectedIndex = 0;
-           
+            ChartUpdate();
             DataContext = this;
         }
 
+        private void ChartUpdate()
+        {
+            var info = DatabaseContext.DBContext.Context.FoodInformations.ToList().Where(x => x.MealTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
 
-
-        //private void UpdateChart()
-        //{
-        //    var info = DatabaseContext.DBContext.Context.FoodInformations.ToList()
-        //      .Where(x => x.MealTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
-
-
-        //    Series currentSeries = ChartCalories.Series.FirstOrDefault();
-        //    currentSeries.ChartType = SeriesChartType.Column;
-        //    currentSeries.Points.Clear();
-
-        //    foreach (var category in dayOfWeeks)
-        //    {
-        //        var calories = info.Where(x => x.MealTime.Value.DayOfWeek == category.Key);
-        //        var cal = calories.Count() == 0 ? 0 : calories.First().AmountOfCalories;
-        //        currentSeries.Points.AddXY(category.Value, cal);
-        //    }
-        //    ChartCalories.Update();
-        //}
-
-        //private void UpdateDate()
-        //{
-        //    PlotModel plotModel = new PlotModel();
-        //    CategoryAxis categoryAxis = new CategoryAxis();
-        //    BarSeries series = new BarSeries();
-        //    var items = new List<BarItem>();
-        //    var info = DatabaseContext.DBContext.Context.FoodInformations
-        //        .Where(x => x.MealTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday))
-        //        .OrderBy(x => x.MealTime);
-
-        //    foreach (var item in dayOfWeeks.OrderBy(x => (int)x.Key))
-        //    {
-        //        categoryAxis.Labels.Add(item.Value);
-        //    }
-
-        //    foreach (var item in info)
-        //    {
-        //        int day = (int)item.MealTime.Value.DayOfWeek + 1;
-        //        items.Add(new BarItem((double)item.AmountOfCalories));
-        //    }
-
-        //    series.ItemsSource = items;
-
-        //    var valueAxis = new LinearAxis
-        //    {
-        //        Position = AxisPosition.Left,
-        //        MinimumPadding = 0,
-        //        MaximumPadding = 0.06,
-        //        AbsoluteMinimum = 0,
-        //        Maximum = info.Max(x => (double)x.AmountOfCalories)
-        //    };
-
-        //    plotModel.Series.Add(series);
-        //    plotModel.Axes.Add(categoryAxis);
-        //    plotModel.Axes.Add(valueAxis);
-        //    Grafic.Model = plotModel;
-
-        //}
+            List<Cal> cals = new List<Cal>();
+            foreach (var item in dayOfWeeks)
+            {
+                var cal = info.Where(x => x.MealTime.Value.DayOfWeek == item.Key);
+                cals.Add(new Cal { Day = item.Value, Calories = cal.Count() == 0 ? 0 : (double)cal.Sum(x => x.AmountOfCalories) });
+            }
+            ColGraficCalroies.ItemsSource = cals;
+        }
 
         private DateTime GetFirstDateOfWeek(DateTime dayInWeek, DayOfWeek firstDay)
         {
@@ -106,7 +63,7 @@ namespace HealthTracker.Pages
 
         private List<string> eating = new List<string>
         {
-        "Не указано", "Завтрак", "Обед", "Ужин", "Перекус"
+            "Не указано", "Завтрак", "Обед", "Ужин", "Перекус"
         };
 
         private Dictionary<DayOfWeek, string> dayOfWeeks = new Dictionary<DayOfWeek, string>
@@ -126,6 +83,7 @@ namespace HealthTracker.Pages
             try
             {
                 Save();
+                ChartUpdate();
             }
             catch (Exception ex)
             {

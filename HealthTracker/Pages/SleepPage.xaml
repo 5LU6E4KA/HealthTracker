@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:HealthTracker.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="SleepPage"
     d:DesignHeight="450"
@@ -26,24 +27,33 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition />
+                            <RowDefinition Height="150" />
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
 
                         </Grid.RowDefinitions>
 
-                        <ListView
+                        <syncfusion:SfChart
+                            x:Name="GraficCalroies"
                             Grid.Row="0"
                             Grid.ColumnSpan="2"
-                            Margin="0,0,0,20" />
+                            Margin="0,0,0,20">
+
+                            <syncfusion:ColumnSeries
+                                Name="ColGraficCalroies"
+                                ShowTooltip="True"
+                                XBindingPath="Day"
+                                YBindingPath="Calories" />
+
+                        </syncfusion:SfChart>
 
                         <DockPanel
                             Grid.Row="1"
                             Grid.Column="0"
                             Margin="0,0,30,20"
                             HorizontalAlignment="Stretch">
-                            <Label Content="Время пробуджения" />
+                            <Label Content="Отход ко сну" />
                             <xctk:MaskedTextBox
                                 Mask="99:99"
                                 Style="{StaticResource LoginTextBoxStyle}"
@@ -69,17 +79,11 @@
                             Grid.ColumnSpan="2"
                             Width="150"
                             Height="50"
+                            Margin="0,20,0,10"
                             HorizontalAlignment="Center"
                             Click="ButtonSaveSleep_Click"
                             Content="Сохранить"
                             Style="{StaticResource SignInButtonStyle}" />
-
-                        <ListView
-                            Grid.Row="3"
-                            Grid.ColumnSpan="2"
-                            Margin="0,20,0,10" />
-
-
                     </Grid>
                 </Expander>
 

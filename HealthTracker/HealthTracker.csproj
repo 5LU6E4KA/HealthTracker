@@ -302,6 +302,7 @@
     <Compile Include="Pages\BMIPage.xaml.cs">
       <DependentUpon>BMIPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Cals.cs" />
     <Compile Include="Pages\HandBookPage.xaml.cs">
       <DependentUpon>HandBookPage.xaml</DependentUpon>
     </Compile>

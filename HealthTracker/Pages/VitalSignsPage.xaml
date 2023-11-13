@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HealthTracker.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     Title="VitalSignsPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -24,43 +25,48 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="150" />
                             <RowDefinition />
                             <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
+
                         </Grid.RowDefinitions>
 
-                        <ListView
+                        <syncfusion:SfChart
+                            x:Name="GraficCalroies"
                             Grid.Row="0"
                             Grid.ColumnSpan="2"
-                            Margin="0,0,0,20" />
+                            Margin="0,0,0,20">
+
+                            <syncfusion:ColumnSeries
+                                Name="ColGraficCalroies"
+                                ShowTooltip="True"
+                                XBindingPath="Day"
+                                YBindingPath="Calories" />
+
+                        </syncfusion:SfChart>
 
                         <DockPanel
                             Grid.Row="1"
-                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
                             Margin="0,0,70,0"
-                            HorizontalAlignment="Stretch">
+                            HorizontalAlignment="Center">
                             <Label Content="Пульс" />
-                            <TextBox MinWidth="160" MaxWidth="5000" />
+                            <TextBox
+                                MinWidth="160"
+                                MaxWidth="5000"
+                                Style="{StaticResource LoginTextBoxStyle}" />
                         </DockPanel>
 
-
                         <Button
-                            Grid.Row="5"
+                            Grid.Row="2"
                             Grid.ColumnSpan="2"
-                            Width="100"
-                            Height="40"
-                            HorizontalAlignment="Center" />
-
-                        <ListView
-                            Grid.Row="6"
-                            Grid.ColumnSpan="2"
-                            Margin="0,20,0,10" />
-
-
+                            Width="150"
+                            Height="50"
+                            Margin="0,20,0,10"
+                            HorizontalAlignment="Center"
+                            Click="ButtonSavePulse_Click"
+                            Content="Сохранить"
+                            Style="{StaticResource SignInButtonStyle}" />
                     </Grid>
                 </Expander>
 
@@ -72,48 +78,71 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="150" />
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
-                            <RowDefinition />
-
                         </Grid.RowDefinitions>
 
-                        <ListView
+                        <syncfusion:SfChart
+                            x:Name="GraficPressure"
                             Grid.Row="0"
                             Grid.ColumnSpan="2"
-                            Margin="0,0,0,20" />
+                            Margin="0,0,0,20">
+
+                            <syncfusion:ColumnSeries
+                                Name="ColGraficPressure"
+                                ShowTooltip="True"
+                                XBindingPath="Day"
+                                YBindingPath="Calories" />
+
+                        </syncfusion:SfChart>
 
                         <DockPanel
                             Grid.Row="1"
                             Grid.Column="0"
                             Margin="0,0,70,0"
                             HorizontalAlignment="Stretch">
-                            <Label Content="Тип жидкости" />
-                            <TextBox MinWidth="160" MaxWidth="5000" />
+                            <Label Content="Систолическое давление" />
+                            <TextBox
+                                MinWidth="160"
+                                MaxWidth="5000"
+                                Style="{StaticResource LoginTextBoxStyle}" />
                         </DockPanel>
 
                         <DockPanel
                             Grid.Row="1"
                             Grid.Column="1"
-                            Margin="0,0,30,20"
+                            Margin="0,0,70,0"
                             HorizontalAlignment="Stretch">
-                            <Label Content="Уровень жидкости" />
-                            <TextBox MinWidth="180" />
+                            <Label Content="Диастолическое давление" />
+                            <TextBox
+                                MinWidth="160"
+                                MaxWidth="5000"
+                                Style="{StaticResource LoginTextBoxStyle}" />
                         </DockPanel>
-
-
-                        <Button
+                        <DockPanel
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
-                            Width="100"
-                            Height="40"
-                            HorizontalAlignment="Center" />
+                            Margin="40,0,70,0"
+                            HorizontalAlignment="Center">
+                            <Label Content="Положение тела" />
+                            <ComboBox
+                                MinWidth="160"
+                                MaxWidth="5000"
+                                Style="{StaticResource ComboBoxStyle}" />
+                        </DockPanel>
 
-                        <ListView
+                        <Button
                             Grid.Row="3"
                             Grid.ColumnSpan="2"
-                            Margin="0,20,0,10" />
+                            Width="150"
+                            Height="50"
+                            Margin="0,20,0,10"
+                            HorizontalAlignment="Center"
+                            Click="ButtonSavePressure_Click"
+                            Content="Сохранить"
+                            Style="{StaticResource SignInButtonStyle}" />
 
 
                     </Grid>
@@ -127,49 +156,66 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition />
+                            <RowDefinition Height="150" />
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
 
                         </Grid.RowDefinitions>
 
-                        <ListView
+                        <syncfusion:SfChart
+                            x:Name="GraficWater"
                             Grid.Row="0"
                             Grid.ColumnSpan="2"
-                            Margin="0,0,0,20" />
+                            Margin="0,0,0,20">
+
+                            <syncfusion:ColumnSeries
+                                Name="ColGraficWater"
+                                ShowTooltip="True"
+                                XBindingPath="Day"
+                                YBindingPath="Calories" />
+
+                        </syncfusion:SfChart>
+
 
                         <DockPanel
                             Grid.Row="1"
                             Grid.Column="0"
-                            Margin="0,0,70,0"
+                            Margin="0,0,30,20"
                             HorizontalAlignment="Stretch">
-                            <Label Content="Температура тела" />
-                            <TextBox MinWidth="160" MaxWidth="5000" />
+                            <Label Content="Место измерения" />
+                            <ComboBox
+                                x:Name="FluidTypeComboBox"
+                                MinWidth="160"
+                                MaxWidth="5000"
+                                ItemsSource="{Binding FluidType}"
+                                Style="{StaticResource ComboBoxStyle}" />
                         </DockPanel>
+
 
                         <DockPanel
                             Grid.Row="1"
                             Grid.Column="1"
                             Margin="0,0,30,20"
                             HorizontalAlignment="Stretch">
-                            <Label Content="Место измерения" />
-                            <TextBox MinWidth="180" />
+                            <Label Content="Температура тела" />
+                            <TextBox
+                                MinWidth="180"
+                                MaxLength="6"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                TextAlignment="Center" />
                         </DockPanel>
 
 
                         <Button
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
-                            Width="100"
-                            Height="40"
-                            HorizontalAlignment="Center" />
-
-                        <ListView
-                            Grid.Row="3"
-                            Grid.ColumnSpan="2"
-                            Margin="0,20,0,10" />
-
+                            Width="150"
+                            Height="50"
+                            Margin="0,20,0,10"
+                            HorizontalAlignment="Center"
+                            Content="Сохранить"
+                            Style="{StaticResource SignInButtonStyle}" />
 
                     </Grid>
                 </Expander>
