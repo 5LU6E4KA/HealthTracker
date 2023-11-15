@@ -35,16 +35,16 @@
                         </Grid.RowDefinitions>
 
                         <syncfusion:SfChart
-                            x:Name="GraficCalroies"
+                            x:Name="GraficSleep"
                             Grid.Row="0"
                             Grid.ColumnSpan="2"
                             Margin="0,0,0,20">
 
                             <syncfusion:ColumnSeries
-                                Name="ColGraficCalroies"
+                                Name="ColGraficSleeps"
                                 ShowTooltip="True"
                                 XBindingPath="Day"
-                                YBindingPath="Calories" />
+                                YBindingPath="SleepTime" />
 
                         </syncfusion:SfChart>
 
@@ -54,11 +54,11 @@
                             Margin="0,0,30,20"
                             HorizontalAlignment="Stretch">
                             <Label Content="Отход ко сну" />
-                            <xctk:MaskedTextBox
-                                Mask="99:99"
-                                Style="{StaticResource LoginTextBoxStyle}"
-                                TextAlignment="Center"
-                                ValueDataType="{x:Type s:TimeSpan}" />
+                            <xctk:DateTimePicker
+                                x:Name="BedTimePicker"
+                                Format="Custom"
+                                FormatString="dd.MM HH:mm"
+                                TextAlignment="Center" />
                         </DockPanel>
 
                         <DockPanel
@@ -67,9 +67,10 @@
                             Margin="0,0,30,20"
                             HorizontalAlignment="Stretch">
                             <Label Content="Время пробуджения" />
-                            <xctk:MaskedTextBox
-                                Mask="99:99"
-                                Style="{StaticResource LoginTextBoxStyle}"
+                            <xctk:DateTimePicker
+                                x:Name="WakeUpTimePicker"
+                                Format="Custom"
+                                FormatString="dd.MM HH:mm"
                                 TextAlignment="Center" />
                         </DockPanel>
 

@@ -5,55 +5,69 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static HealthTracker.DateClass.DateInfo;
 
 
 
 namespace HealthTracker.Pages
 {
     
-    public class Cal
+    public class Calorie
     {
         public string Day { get; set; }
         public double Calories { get; set; }
     }
 
+    public class Water
+    {
+        public string Day { get; set; }
+        public double Liquid { get; set; }
+    }
+
     public partial class MealPage : Page
     {
+        private Users _currentUser;
         public List<string> Eating { get; set; }
         public List<string> FluidType { get; set; }
         public List<string> DayOfWeeks { get; set; }
         
-        public MealPage()
+        public MealPage(Users user)
         {
+            _currentUser = user;
             InitializeComponent();
             Eating = eating;
             EatingComboBox.SelectedIndex = 0;
             FluidType = fluidType;
             FluidTypeComboBox.SelectedIndex = 0;
-            ChartUpdate();
+            ChartUpdateMeal();
+            ChartUpdateWater();
             DataContext = this;
         }
 
-        private void ChartUpdate()
+        private void ChartUpdateMeal()
         {
-            var info = DatabaseContext.DBContext.Context.FoodInformations.ToList().Where(x => x.MealTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
+            var info = DatabaseContext.DBContext.Context.FoodInformations.ToList().Where(x => x.Users == _currentUser && x.MealTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
 
-            List<Cal> cals = new List<Cal>();
+            List<Calorie> calories = new List<Calorie>();
             foreach (var item in dayOfWeeks)
             {
-                var cal = info.Where(x => x.MealTime.Value.DayOfWeek == item.Key);
-                cals.Add(new Cal { Day = item.Value, Calories = cal.Count() == 0 ? 0 : (double)cal.Sum(x => x.AmountOfCalories) });
+                var calorie = info.Where(x => x.MealTime.Value.DayOfWeek == item.Key);
+                calories.Add(new Calorie { Day = item.Value, Calories = calorie.Count() == 0 ? 0 : (double)calorie.Sum(x => x.AmountOfCalories) });
             }
-            ColGraficCalroies.ItemsSource = cals;
+            ColGraficCalroies.ItemsSource = calories;
         }
 
-        private DateTime GetFirstDateOfWeek(DateTime dayInWeek, DayOfWeek firstDay)
+        private void ChartUpdateWater()
         {
-            DateTime firstDayInWeek = dayInWeek.Date;
-            while (firstDayInWeek.DayOfWeek != firstDay)
-                firstDayInWeek = firstDayInWeek.AddDays(-1);
+            var info = DatabaseContext.DBContext.Context.WaterInformations.ToList().Where(x => x.Users == _currentUser && x.DrinkingTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
 
-            return firstDayInWeek;
+            List<Water> waters = new List<Water>();
+            foreach (var item in dayOfWeeks)
+            {
+                var water = info.Where(x => x.DrinkingTime.Value.DayOfWeek == item.Key);
+                waters.Add(new Water { Day = item.Value, Liquid = water.Count() == 0 ? 0 : (double)water.Sum(x => x.LiquidLevel) });
+            }
+            ColGraficWater.ItemsSource = waters;
         }
 
         private List<string> fluidType = new List<string>
@@ -82,8 +96,8 @@ namespace HealthTracker.Pages
         {
             try
             {
-                Save();
-                ChartUpdate();
+                SaveMeal();
+                ChartUpdateMeal();
             }
             catch (Exception ex)
             {
@@ -91,7 +105,7 @@ namespace HealthTracker.Pages
             }
         }
 
-        public void Save()
+        public void SaveMeal()
         {
 
             if (string.IsNullOrWhiteSpace(CarloriesGainedTextBox.Text))
@@ -104,6 +118,7 @@ namespace HealthTracker.Pages
 
             DatabaseContext.DBContext.Context.FoodInformations.Add(new FoodInformations
             {
+                UserID = _currentUser.UserID,
                 AmountOfSugar = Convert.ToDecimal(SugarTextBox.Text),
                 AmountOfCalories = Convert.ToDecimal(CarloriesGainedTextBox.Text),
                 Intake = EatingComboBox.SelectedItem?.ToString(),
@@ -116,17 +131,38 @@ namespace HealthTracker.Pages
 
             DatabaseContext.DBContext.Context.SaveChanges();
         }
+        public void SaveWater()
+        {
+
+            if (string.IsNullOrWhiteSpace(WaterLevelTextBox.Text))
+            {
+                MessageBox.Show("Пожалуйста, введите количество выпитой жидкости");
+                return;
+            }
+
+            DateTime waterTime = DateTime.Now;
+
+            DatabaseContext.DBContext.Context.WaterInformations.Add(new WaterInformations
+            {
+                UserID = _currentUser.UserID,
+                LiquidLevel = Convert.ToDecimal(WaterLevelTextBox.Text),
+                LiquidType = FluidTypeComboBox.SelectedItem?.ToString(),
+                DrinkingTime = waterTime
+            }); 
+
+            DatabaseContext.DBContext.Context.SaveChanges();
+        }
         private void NumericTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
 
-            // Если введенный символ не цифра и не запятая, отменяем ввод
+            
             if (!char.IsDigit(e.Text, 0) && e.Text != ",")
             {
                 e.Handled = true;
             }
 
-            // Если введенная запятая уже присутствует в тексте, отменяем ввод
+           
             if (e.Text == "," && textBox.Text.Contains(","))
             {
                 e.Handled = true;
@@ -135,7 +171,7 @@ namespace HealthTracker.Pages
             if (e.Text == "," && string.IsNullOrEmpty(textBox.Text))
             {
                 textBox.Text = "0,";
-                textBox.CaretIndex = 2; // установка курсора после "0"
+                textBox.CaretIndex = 2; 
                 e.Handled = true;
             }
         }
@@ -159,5 +195,18 @@ namespace HealthTracker.Pages
             return text.All(char.IsLetter);
         }
 
+        private void ButtonSaveWater_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                SaveWater();
+                ChartUpdateWater();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
+            }
+        }
     }
 }

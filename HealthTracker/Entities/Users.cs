@@ -17,9 +17,12 @@ namespace HealthTracker.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
         {
-            this.Meals = new HashSet<Meals>();
-            this.SleepModes = new HashSet<SleepModes>();
-            this.VitalSigns = new HashSet<VitalSigns>();
+            this.BloodPressureInformations = new HashSet<BloodPressureInformations>();
+            this.FoodInformations = new HashSet<FoodInformations>();
+            this.PulseInformations = new HashSet<PulseInformations>();
+            this.SleepInformations = new HashSet<SleepInformations>();
+            this.TemperatureInformations = new HashSet<TemperatureInformations>();
+            this.WaterInformations = new HashSet<WaterInformations>();
         }
     
         public int UserID { get; set; }
@@ -27,10 +30,16 @@ namespace HealthTracker.Entities
         public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Meals> Meals { get; set; }
+        public virtual ICollection<BloodPressureInformations> BloodPressureInformations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SleepModes> SleepModes { get; set; }
+        public virtual ICollection<FoodInformations> FoodInformations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VitalSigns> VitalSigns { get; set; }
+        public virtual ICollection<PulseInformations> PulseInformations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SleepInformations> SleepInformations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TemperatureInformations> TemperatureInformations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WaterInformations> WaterInformations { get; set; }
     }
 }

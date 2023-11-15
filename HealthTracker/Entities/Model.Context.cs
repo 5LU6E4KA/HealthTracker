@@ -27,14 +27,11 @@ namespace HealthTracker.Entities
     
         public virtual DbSet<BloodPressureInformations> BloodPressureInformations { get; set; }
         public virtual DbSet<FoodInformations> FoodInformations { get; set; }
-        public virtual DbSet<Meals> Meals { get; set; }
         public virtual DbSet<PulseInformations> PulseInformations { get; set; }
         public virtual DbSet<SleepInformations> SleepInformations { get; set; }
-        public virtual DbSet<SleepModes> SleepModes { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TemperatureInformations> TemperatureInformations { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<VitalSigns> VitalSigns { get; set; }
         public virtual DbSet<WaterInformations> WaterInformations { get; set; }
     }
 }

@@ -14,19 +14,13 @@ namespace HealthTracker.Entities
     
     public partial class BloodPressureInformations
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BloodPressureInformations()
-        {
-            this.VitalSigns = new HashSet<VitalSigns>();
-        }
-    
         public int BloodPressureInformationID { get; set; }
-        public Nullable<System.TimeSpan> MeasurementTimeBloodPressure { get; set; }
+        public Nullable<System.DateTime> MeasurementTimeBloodPressure { get; set; }
         public int SystolicPressure { get; set; }
         public int DiastolicPressure { get; set; }
         public string BodyPosition { get; set; }
+        public int UserID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VitalSigns> VitalSigns { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

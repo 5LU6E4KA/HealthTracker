@@ -20,8 +20,9 @@
                 <Expander Header="Пульс" Style="{StaticResource RecomendationExpander}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="67*" />
+                            <ColumnDefinition Width="70*" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -32,26 +33,45 @@
                         </Grid.RowDefinitions>
 
                         <syncfusion:SfChart
-                            x:Name="GraficCalroies"
+                            x:Name="GraficPulse"
                             Grid.Row="0"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="3"
                             Margin="0,0,0,20">
 
-                            <syncfusion:ColumnSeries
-                                Name="ColGraficCalroies"
+                            <syncfusion:SfChart.PrimaryAxis>
+                                <syncfusion:DateTimeAxis
+                                    Name="xAxisPulse"
+                                    EdgeLabelsDrawingMode="Shift"
+                                    IntervalType="Hours"
+                                    LabelFormat="HH:mm"
+                                    LabelRotationAngle="0" />
+                            </syncfusion:SfChart.PrimaryAxis>
+
+                            <syncfusion:SfChart.SecondaryAxis>
+                                <syncfusion:NumericalAxis
+                                    Name="yAxisPulse"
+                                    Maximum="300"
+                                    Minimum="0" />
+                            </syncfusion:SfChart.SecondaryAxis>
+
+                            <syncfusion:LineSeries
+                                Name="LineGraficPulse"
                                 ShowTooltip="True"
-                                XBindingPath="Day"
-                                YBindingPath="Calories" />
+                                XBindingPath="Time"
+                                YBindingPath="PulseGraf" />
 
                         </syncfusion:SfChart>
 
                         <DockPanel
                             Grid.Row="1"
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
                             Grid.ColumnSpan="2"
-                            Margin="0,0,70,0"
+                            Margin="0,0,0,80"
                             HorizontalAlignment="Center">
                             <Label Content="Пульс" />
                             <TextBox
+                                x:Name="PulseTextBox"
                                 MinWidth="160"
                                 MaxWidth="5000"
                                 Style="{StaticResource LoginTextBoxStyle}" />
@@ -59,11 +79,12 @@
 
                         <Button
                             Grid.Row="2"
+                            Grid.Column="1"
                             Grid.ColumnSpan="2"
                             Width="150"
                             Height="50"
-                            Margin="0,20,0,10"
-                            HorizontalAlignment="Center"
+                            Margin="259,20,0,10"
+                            HorizontalAlignment="Left"
                             Click="ButtonSavePulse_Click"
                             Content="Сохранить"
                             Style="{StaticResource SignInButtonStyle}" />
@@ -164,18 +185,35 @@
                         </Grid.RowDefinitions>
 
                         <syncfusion:SfChart
-                            x:Name="GraficWater"
+                            x:Name="GraficTemperature"
                             Grid.Row="0"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="3"
                             Margin="0,0,0,20">
 
-                            <syncfusion:ColumnSeries
-                                Name="ColGraficWater"
+                            <syncfusion:SfChart.PrimaryAxis>
+                                <syncfusion:DateTimeAxis
+                                    Name="xAxisTemperature"
+                                    EdgeLabelsDrawingMode="Shift"
+                                    IntervalType="Hours"
+                                    LabelFormat="HH:mm"
+                                    LabelRotationAngle="0" />
+                            </syncfusion:SfChart.PrimaryAxis>
+
+                            <syncfusion:SfChart.SecondaryAxis>
+                                <syncfusion:NumericalAxis
+                                    Name="yAxisTemperature"
+                                    Maximum="42"
+                                    Minimum="0" />
+                            </syncfusion:SfChart.SecondaryAxis>
+
+                            <syncfusion:LineSeries
+                                Name="LineGraficTemperature"
                                 ShowTooltip="True"
-                                XBindingPath="Day"
-                                YBindingPath="Calories" />
+                                XBindingPath="TemperatureTime"
+                                YBindingPath="Temperature" />
 
                         </syncfusion:SfChart>
+
 
 
                         <DockPanel
@@ -185,10 +223,10 @@
                             HorizontalAlignment="Stretch">
                             <Label Content="Место измерения" />
                             <ComboBox
-                                x:Name="FluidTypeComboBox"
+                                x:Name="PlaceComboBox"
                                 MinWidth="160"
                                 MaxWidth="5000"
-                                ItemsSource="{Binding FluidType}"
+                                ItemsSource="{Binding Place}"
                                 Style="{StaticResource ComboBoxStyle}" />
                         </DockPanel>
 
@@ -200,8 +238,9 @@
                             HorizontalAlignment="Stretch">
                             <Label Content="Температура тела" />
                             <TextBox
+                                x:Name="TemperatureTextBox"
                                 MinWidth="180"
-                                MaxLength="6"
+                                MaxLength="4"
                                 Style="{StaticResource LoginTextBoxStyle}"
                                 TextAlignment="Center" />
                         </DockPanel>
@@ -214,6 +253,7 @@
                             Height="50"
                             Margin="0,20,0,10"
                             HorizontalAlignment="Center"
+                            Click="ButtonSaveTemperature_Click"
                             Content="Сохранить"
                             Style="{StaticResource SignInButtonStyle}" />
 

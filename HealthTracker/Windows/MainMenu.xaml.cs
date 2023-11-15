@@ -22,10 +22,11 @@ namespace HealthTracker.Pages
     /// </summary>
     public partial class MainMenu : Window
     {
-        public MainMenu()
+        private Users _currentUser;
+        public MainMenu(Users user)
         {
             InitializeComponent();
-            
+            _currentUser = user;
         }
 
         private void Themes_Click(object sender, RoutedEventArgs e)
@@ -57,13 +58,13 @@ namespace HealthTracker.Pages
             => frameContent.Navigate(new RecomendationPage());
 
         private void RadioButtonMeal_Click(object sender, RoutedEventArgs e)
-            => frameContent.Navigate(new MealPage());
+            => frameContent.Navigate(new MealPage(_currentUser));
 
         private void RadioButtonVitalSigns_Click(object sender, RoutedEventArgs e)
-            => frameContent.Navigate(new VitalSignsPage());
+            => frameContent.Navigate(new VitalSignsPage(_currentUser));
 
         private void RadioButtonSleep_Click(object sender, RoutedEventArgs e) 
-            => frameContent.Navigate(new SleepPage());
+            => frameContent.Navigate(new SleepPage(_currentUser));
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

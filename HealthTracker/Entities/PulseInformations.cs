@@ -14,17 +14,11 @@ namespace HealthTracker.Entities
     
     public partial class PulseInformations
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PulseInformations()
-        {
-            this.VitalSigns = new HashSet<VitalSigns>();
-        }
-    
         public int PulseInformationID { get; set; }
-        public Nullable<System.TimeSpan> MeasurementTimePulse { get; set; }
+        public Nullable<System.DateTime> MeasurementTimePulse { get; set; }
         public int Pulse { get; set; }
+        public int UserID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VitalSigns> VitalSigns { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

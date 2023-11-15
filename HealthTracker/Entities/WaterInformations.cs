@@ -14,18 +14,12 @@ namespace HealthTracker.Entities
     
     public partial class WaterInformations
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public WaterInformations()
-        {
-            this.Meals = new HashSet<Meals>();
-        }
-    
         public int WaterInformationID { get; set; }
-        public Nullable<System.TimeSpan> DrinkingTime { get; set; }
+        public Nullable<System.DateTime> DrinkingTime { get; set; }
         public decimal LiquidLevel { get; set; }
         public string LiquidType { get; set; }
+        public int UserID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Meals> Meals { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

@@ -14,18 +14,12 @@ namespace HealthTracker.Entities
     
     public partial class TemperatureInformations
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TemperatureInformations()
-        {
-            this.VitalSigns = new HashSet<VitalSigns>();
-        }
-    
         public int TemperatureInformationID { get; set; }
-        public Nullable<System.TimeSpan> MeasurementTimeTemperature { get; set; }
+        public Nullable<System.DateTime> MeasurementTimeTemperature { get; set; }
         public decimal BodyTemperature { get; set; }
         public string MeasurementPlace { get; set; }
+        public int UserID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VitalSigns> VitalSigns { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

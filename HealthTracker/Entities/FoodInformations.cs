@@ -14,12 +14,6 @@ namespace HealthTracker.Entities
     
     public partial class FoodInformations
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FoodInformations()
-        {
-            this.Meals = new HashSet<Meals>();
-        }
-    
         public int FoodInformationID { get; set; }
         public Nullable<System.DateTime> MealTime { get; set; }
         public string Intake { get; set; }
@@ -29,8 +23,8 @@ namespace HealthTracker.Entities
         public Nullable<decimal> AmountOfProtein { get; set; }
         public Nullable<decimal> AmountOfSugar { get; set; }
         public Nullable<decimal> AmountOfFat { get; set; }
+        public int UserID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Meals> Meals { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

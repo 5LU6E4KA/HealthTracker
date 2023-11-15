@@ -14,17 +14,12 @@ namespace HealthTracker.Entities
     
     public partial class SleepInformations
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SleepInformations()
-        {
-            this.SleepModes = new HashSet<SleepModes>();
-        }
-    
         public int SleepInformationID { get; set; }
-        public System.TimeSpan Bedtime { get; set; }
-        public System.TimeSpan WakeUpTime { get; set; }
+        public System.DateTime BedTime { get; set; }
+        public System.DateTime WakeUpTime { get; set; }
+        public Nullable<System.DateTime> SleepTime { get; set; }
+        public int UserID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SleepModes> SleepModes { get; set; }
+        public virtual Users Users { get; set; }
     }
 }
