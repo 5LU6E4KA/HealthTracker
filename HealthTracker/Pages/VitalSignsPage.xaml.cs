@@ -1,4 +1,5 @@
 ﻿using HealthTracker.Entities;
+using Syncfusion.UI.Xaml.Charts;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -31,46 +32,57 @@ namespace HealthTracker.Pages
         public double Temperature { get; set; }
     }
 
+    public class Pressure
+    {
+        public DateTime PressureTime { get; set; }
+        public int Siastolic { get; set; }
+        public int Diastolic { get; set; }
+    }
+
+
 
     public partial class VitalSignsPage : Page
     {
         public List<string> Place { get; set; }
+        public List<string> Position { get; set; }
 
-        private List<string> place = new List<string>
+        private List<string> _place = new List<string>
         {
             "Не указано", "Подмышка", "Лоб", "Запястье", "Височная артерия"
+        };
+
+        private List<string> _position = new List<string>
+        {
+            "Не указано", "Положение стоя", "Положение лежа", "Положение сидя"
         };
 
         private Users _currentUser;
         public VitalSignsPage(Users user)
         {
             InitializeComponent();
-            Place = place;
+            Place = _place;
+            Position = _position;
+            BodyPositionComboBox.SelectedIndex = 0;
             PlaceComboBox.SelectedIndex = 0;
             _currentUser = user;
             ChartUpdatePulse();
             ChartUpdateTemperature();
+            ChartUpdateBloodPressure();
             DataContext = this;
         }
 
         private void ChartUpdatePulse()
         {
-            var info = DatabaseContext.DBContext.Context.PulseInformations.ToList()
-            .Where(x => x.Users == _currentUser && x.MeasurementTimePulse > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
-
+            var currentDate = DateTime.Now.Date;
+            var info = DatabaseContext.DBContext.Context.PulseInformations.ToList().Where(x => x.Users == _currentUser && x.MeasurementTimePulse > currentDate);
             List<Pulses> pulses = new List<Pulses>();
-            foreach (var item in dayOfWeeks)
+            foreach (var pulseMeasurement in info)
             {
-                var pulseData = info.Where(x => x.MeasurementTimePulse.Value.DayOfWeek == item.Key);
-
-                foreach (var pulseMeasurement in pulseData)
+                pulses.Add(new Pulses
                 {
-                    pulses.Add(new Pulses
-                    {
-                        Time = pulseMeasurement.MeasurementTimePulse.Value,
-                        PulseGraf = (double)pulseMeasurement.Pulse
-                    });
-                }
+                    Time = pulseMeasurement.MeasurementTimePulse.Value,
+                    PulseGraf = (double)pulseMeasurement.Pulse
+                });
             }
 
             LineGraficPulse.ItemsSource = pulses;
@@ -78,37 +90,62 @@ namespace HealthTracker.Pages
 
         private void ChartUpdateTemperature()
         {
-            var info = DatabaseContext.DBContext.Context.TemperatureInformations.ToList()
-            .Where(x => x.Users == _currentUser && x.MeasurementTimeTemperature > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
+            var currentDate = DateTime.Now.Date;
+            var info = DatabaseContext.DBContext.Context.TemperatureInformations
+                .ToList()
+                .Where(x => x.Users == _currentUser && x.MeasurementTimeTemperature > currentDate);
 
             List<Temperatures> temperatures = new List<Temperatures>();
-            foreach (var item in dayOfWeeks)
+            foreach (var temperatureMeasurement in info)
             {
-                var temperaturesData = info.Where(x => x.MeasurementTimeTemperature.Value.DayOfWeek == item.Key);
-
-                foreach (var elem in temperaturesData)
+                temperatures.Add(new Temperatures
                 {
-                    temperatures.Add(new Temperatures
-                    {
-                        TemperatureTime = elem.MeasurementTimeTemperature.Value,
-                        Temperature = (double)elem.BodyTemperature
-                    });
-                }
+                    TemperatureTime = temperatureMeasurement.MeasurementTimeTemperature.Value,
+                    Temperature = (double)temperatureMeasurement.BodyTemperature
+                });
             }
 
             LineGraficTemperature.ItemsSource = temperatures;
         }
-        private Dictionary<DayOfWeek, string> dayOfWeeks = new Dictionary<DayOfWeek, string>
-        {
-            {DayOfWeek.Monday, "Пн" },
-            {DayOfWeek.Tuesday, "Вт" },
-            {DayOfWeek.Wednesday, "Ср" },
-            {DayOfWeek.Thursday, "Чт" },
-            {DayOfWeek.Friday, "Пт" },
-            {DayOfWeek.Saturday, "Сб" },
-            {DayOfWeek.Sunday, "Вс" }
 
-        };
+        private void ChartUpdateBloodPressure()
+        {
+            try
+            {
+                var currentDate = DateTime.Now.Date;
+                var info = DatabaseContext.DBContext.Context.BloodPressureInformations.ToList()
+                    .Where(x => x.Users == _currentUser && x.MeasurementTimeBloodPressure > currentDate)
+                    .OrderBy(x => x.MeasurementTimeBloodPressure);
+
+                List<Pressure> diastolicPressures = new List<Pressure>();
+                List<Pressure> systolicPressures = new List<Pressure>();
+                foreach (var pressureMeasurement in info)
+                {
+                    diastolicPressures.Add(new Pressure
+                    {
+                        PressureTime = pressureMeasurement.MeasurementTimeBloodPressure.Value,
+                        Diastolic = (int)pressureMeasurement.DiastolicPressure
+                    });
+
+                    systolicPressures.Add(new Pressure
+                    {
+                        PressureTime = pressureMeasurement.MeasurementTimeBloodPressure.Value,
+                        Siastolic = (int)pressureMeasurement.SystolicPressure
+                    });
+                }
+
+                LineGraficDiastolic.ItemsSource = diastolicPressures;
+                LineGraficSiastolic.ItemsSource = systolicPressures;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка: {ex.Message}");
+            }
+            
+        }
+
+        
 
         public void SavePulse()
         {
@@ -155,6 +192,39 @@ namespace HealthTracker.Pages
             DatabaseContext.DBContext.Context.SaveChanges();
         }
 
+        public void SaveBloodPressure()
+        {
+
+            if (string.IsNullOrWhiteSpace(DiastolickPressureTextBox.Text) || string.IsNullOrWhiteSpace(SystolickPressureTextBox.Text))
+            {
+                MessageBox.Show("Один из параметров артериального давления не заполнен");
+                return;
+            }
+
+            if (Convert.ToInt32(SystolickPressureTextBox.Text) > 240 || Convert.ToInt32(SystolickPressureTextBox.Text) < 80)
+            {
+                MessageBox.Show("Человек не может иметь такое сиастолическое давление");
+                return;
+            }
+
+            if (Convert.ToInt32(DiastolickPressureTextBox.Text) > 90 || Convert.ToInt32(DiastolickPressureTextBox.Text) < 55)
+            {
+                MessageBox.Show("Человек не может иметь такое диастолическое давление");
+                return;
+            }
+
+            DatabaseContext.DBContext.Context.BloodPressureInformations.Add(new BloodPressureInformations
+            {
+                UserID = _currentUser.UserID,
+                DiastolicPressure = Convert.ToInt32(DiastolickPressureTextBox.Text),
+                SystolicPressure = Convert.ToInt32(SystolickPressureTextBox.Text),
+                BodyPosition = BodyPositionComboBox.SelectedItem?.ToString(),
+                MeasurementTimeBloodPressure = DateTime.Now
+            });
+
+            DatabaseContext.DBContext.Context.SaveChanges();
+        }
+
         private void ButtonSavePulse_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -183,7 +253,15 @@ namespace HealthTracker.Pages
 
         private void ButtonSavePressure_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                SaveBloodPressure();
+                ChartUpdateBloodPressure();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
+            }
         }
 
         

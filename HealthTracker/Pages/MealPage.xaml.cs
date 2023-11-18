@@ -30,7 +30,9 @@ namespace HealthTracker.Pages
         public List<string> Eating { get; set; }
         public List<string> FluidType { get; set; }
         public List<string> DayOfWeeks { get; set; }
-        
+        private DateTime _currentMealChartDate = DateTime.Now;
+        private DateTime _currentWaterChartDate = DateTime.Now;
+
         public MealPage(Users user)
         {
             _currentUser = user;
@@ -39,14 +41,20 @@ namespace HealthTracker.Pages
             EatingComboBox.SelectedIndex = 0;
             FluidType = fluidType;
             FluidTypeComboBox.SelectedIndex = 0;
-            ChartUpdateMeal();
-            ChartUpdateWater();
+            ChartUpdateMeal(DateTime.Now);
+            ChartUpdateWater(DateTime.Now);
             DataContext = this;
         }
 
-        private void ChartUpdateMeal()
+        private void ChartUpdateMeal(DateTime dateTime)
         {
-            var info = DatabaseContext.DBContext.Context.FoodInformations.ToList().Where(x => x.Users == _currentUser && x.MealTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
+            _currentMealChartDate = dateTime;
+            StartDateMealTextBlock.Text = GetFirstDateOfWeek(dateTime, DayOfWeek.Monday).ToString("dd.MM.yyyy");
+            FinishDateMealTextBlock.Text = GetFirstDateOfWeek(dateTime.AddDays(7), DayOfWeek.Monday).
+                AddDays(-1).ToString("dd.MM.yyyy");
+            var info = DatabaseContext.DBContext.Context.FoodInformations.ToList().
+                Where(x => x.Users == _currentUser && x.MealTime > GetFirstDateOfWeek(dateTime, DayOfWeek.Monday) && 
+                x.MealTime < GetFirstDateOfWeek(dateTime.AddDays(7), DayOfWeek.Monday));
 
             List<Calorie> calories = new List<Calorie>();
             foreach (var item in dayOfWeeks)
@@ -57,9 +65,15 @@ namespace HealthTracker.Pages
             ColGraficCalroies.ItemsSource = calories;
         }
 
-        private void ChartUpdateWater()
+        private void ChartUpdateWater(DateTime dateTime)
         {
-            var info = DatabaseContext.DBContext.Context.WaterInformations.ToList().Where(x => x.Users == _currentUser && x.DrinkingTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
+            _currentWaterChartDate = dateTime;
+            StartDateWaterTextBlock.Text = GetFirstDateOfWeek(dateTime, DayOfWeek.Monday).ToString("dd.MM.yyyy");
+            FinishDateWaterTextBlock.Text = GetFirstDateOfWeek(dateTime.AddDays(7), DayOfWeek.Monday).
+                AddDays(-1).ToString("dd.MM.yyyy");
+            var info = DatabaseContext.DBContext.Context.WaterInformations.ToList().
+                Where(x => x.Users == _currentUser && x.DrinkingTime > GetFirstDateOfWeek(dateTime, DayOfWeek.Monday) &&
+                x.DrinkingTime < GetFirstDateOfWeek(dateTime.AddDays(7), DayOfWeek.Monday));
 
             List<Water> waters = new List<Water>();
             foreach (var item in dayOfWeeks)
@@ -97,7 +111,7 @@ namespace HealthTracker.Pages
             try
             {
                 SaveMeal();
-                ChartUpdateMeal();
+                ChartUpdateMeal(DateTime.Now);
             }
             catch (Exception ex)
             {
@@ -201,12 +215,48 @@ namespace HealthTracker.Pages
             try
             {
                 SaveWater();
-                ChartUpdateWater();
+                ChartUpdateWater(DateTime.Now);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
             }
+        }
+
+        private void ButtonLeftCalories_Click(object sender, RoutedEventArgs e)
+        {
+             _currentMealChartDate = _currentMealChartDate.AddDays(-7);
+            ChartUpdateMeal(_currentMealChartDate);
+        }
+
+        private void ButtonRightCalories_Click(object sender, RoutedEventArgs e)
+        {
+            _currentMealChartDate = _currentMealChartDate.AddDays(7);
+            ChartUpdateMeal(_currentMealChartDate);
+        }
+
+        private void ButtonThisWeek_Click(object sender, RoutedEventArgs e)
+        {
+            _currentMealChartDate = DateTime.Now;
+            ChartUpdateMeal(_currentMealChartDate);
+        }
+
+        private void ButtonLeftWater_Click(object sender, RoutedEventArgs e)
+        {
+            _currentWaterChartDate = _currentWaterChartDate.AddDays(-7);
+            ChartUpdateWater(_currentWaterChartDate);
+        }
+
+        private void ButtonRightWater_Click(object sender, RoutedEventArgs e)
+        {
+            _currentWaterChartDate = _currentWaterChartDate.AddDays(7);
+            ChartUpdateWater(_currentWaterChartDate);
+        }
+
+        private void ButtonThisWeekWater_Click(object sender, RoutedEventArgs e)
+        {
+            _currentWaterChartDate = DateTime.Now;
+            ChartUpdateWater(_currentWaterChartDate);
         }
     }
 }

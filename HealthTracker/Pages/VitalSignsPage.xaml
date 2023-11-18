@@ -56,6 +56,7 @@
 
                             <syncfusion:LineSeries
                                 Name="LineGraficPulse"
+                                Interior="{DynamicResource AccentAdditionalColor}"
                                 ShowTooltip="True"
                                 XBindingPath="Time"
                                 YBindingPath="PulseGraf" />
@@ -73,7 +74,7 @@
                             <TextBox
                                 x:Name="PulseTextBox"
                                 MinWidth="160"
-                                MaxWidth="5000"
+                                MaxWidth="1000"
                                 Style="{StaticResource LoginTextBoxStyle}" />
                         </DockPanel>
 
@@ -83,8 +84,8 @@
                             Grid.ColumnSpan="2"
                             Width="150"
                             Height="50"
-                            Margin="259,20,0,10"
-                            HorizontalAlignment="Left"
+                            Margin="0,20,0,10"
+                            HorizontalAlignment="Center"
                             Click="ButtonSavePulse_Click"
                             Content="Сохранить"
                             Style="{StaticResource SignInButtonStyle}" />
@@ -106,16 +107,41 @@
                         </Grid.RowDefinitions>
 
                         <syncfusion:SfChart
-                            x:Name="GraficPressure"
+                            x:Name="GraficBloodPressure"
                             Grid.Row="0"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="3"
                             Margin="0,0,0,20">
 
-                            <syncfusion:ColumnSeries
-                                Name="ColGraficPressure"
+                            <syncfusion:SfChart.PrimaryAxis>
+                                <syncfusion:DateTimeAxis
+                                    Name="xAxisBloodPressure"
+                                    EdgeLabelsDrawingMode="Shift"
+                                    IntervalType="Hours"
+                                    LabelFormat="HH:mm"
+                                    LabelRotationAngle="0" />
+                            </syncfusion:SfChart.PrimaryAxis>
+
+                            <syncfusion:SfChart.SecondaryAxis>
+                                <syncfusion:NumericalAxis
+                                    Name="yAxisBloodPressure"
+                                    Maximum="250"
+                                    Minimum="0" />
+                            </syncfusion:SfChart.SecondaryAxis>
+                            <!--  Вторая линия для систолического давления  -->
+                            <syncfusion:LineSeries
+                                Name="LineGraficSiastolic"
+                                Interior="{DynamicResource PercentPlusColor}"
                                 ShowTooltip="True"
-                                XBindingPath="Day"
-                                YBindingPath="Calories" />
+                                XBindingPath="PressureTime"
+                                YBindingPath="Siastolic" />
+
+                            <!--  Первая линия для диастолического давления  -->
+                            <syncfusion:LineSeries
+                                Name="LineGraficDiastolic"
+                                Interior="{DynamicResource AccentAdditionalColor}"
+                                ShowTooltip="True"
+                                XBindingPath="PressureTime"
+                                YBindingPath="Diastolic" />
 
                         </syncfusion:SfChart>
 
@@ -126,8 +152,9 @@
                             HorizontalAlignment="Stretch">
                             <Label Content="Систолическое давление" />
                             <TextBox
+                                x:Name="SystolickPressureTextBox"
                                 MinWidth="160"
-                                MaxWidth="5000"
+                                MaxWidth="1000"
                                 Style="{StaticResource LoginTextBoxStyle}" />
                         </DockPanel>
 
@@ -138,8 +165,9 @@
                             HorizontalAlignment="Stretch">
                             <Label Content="Диастолическое давление" />
                             <TextBox
+                                x:Name="DiastolickPressureTextBox"
                                 MinWidth="160"
-                                MaxWidth="5000"
+                                MaxWidth="1000"
                                 Style="{StaticResource LoginTextBoxStyle}" />
                         </DockPanel>
                         <DockPanel
@@ -149,8 +177,11 @@
                             HorizontalAlignment="Center">
                             <Label Content="Положение тела" />
                             <ComboBox
+                                Name="BodyPositionComboBox"
                                 MinWidth="160"
-                                MaxWidth="5000"
+                                MaxWidth="1000"
+                                HorizontalAlignment="Stretch"
+                                ItemsSource="{Binding Position}"
                                 Style="{StaticResource ComboBoxStyle}" />
                         </DockPanel>
 
@@ -208,6 +239,7 @@
 
                             <syncfusion:LineSeries
                                 Name="LineGraficTemperature"
+                                Interior="{DynamicResource AccentAdditionalColor}"
                                 ShowTooltip="True"
                                 XBindingPath="TemperatureTime"
                                 YBindingPath="Temperature" />
@@ -225,7 +257,7 @@
                             <ComboBox
                                 x:Name="PlaceComboBox"
                                 MinWidth="160"
-                                MaxWidth="5000"
+                                MaxWidth="1000"
                                 ItemsSource="{Binding Place}"
                                 Style="{StaticResource ComboBoxStyle}" />
                         </DockPanel>
@@ -240,6 +272,7 @@
                             <TextBox
                                 x:Name="TemperatureTextBox"
                                 MinWidth="180"
+                                MaxWidth="1000"
                                 MaxLength="4"
                                 Style="{StaticResource LoginTextBoxStyle}"
                                 TextAlignment="Center" />

@@ -1,0 +1,21 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
+
+    <Style x:Key="Diastolic" TargetType="syncfusion:LineSeries">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource Self}}" Value="LineGraficSiastolic">
+                <Setter Property="Stroke" Value="Orange" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="Siastolic" TargetType="syncfusion:LineSeries">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource Self}}" Value="LineGraficDiastolic">
+                <Setter Property="Stroke" Value="Black" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

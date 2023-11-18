@@ -33,20 +33,56 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
+                        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="70" />
+                            </Grid.ColumnDefinitions>
 
-                        <syncfusion:SfChart
-                            x:Name="GraficCalroies"
-                            Grid.Row="0"
-                            Grid.ColumnSpan="2"
-                            Margin="0,0,0,20">
+                            <Button
+                                Grid.Column="0"
+                                Click="ButtonLeftCalories_Click"
+                                Content="Влево" />
+                            <Button
+                                Grid.Column="2"
+                                Click="ButtonRightCalories_Click"
+                                Content="Вправо" />
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <syncfusion:SfChart x:Name="GraficCalroies" Grid.Row="1">
 
-                            <syncfusion:ColumnSeries
-                                Name="ColGraficCalroies"
-                                ShowTooltip="True"
-                                XBindingPath="Day"
-                                YBindingPath="Calories" />
+                                    <syncfusion:ColumnSeries
+                                        Name="ColGraficCalroies"
+                                        Interior="{DynamicResource AccentAdditionalColor}"
+                                        ShowTooltip="True"
+                                        XBindingPath="Day"
+                                        YBindingPath="Calories" />
 
-                        </syncfusion:SfChart>
+                                </syncfusion:SfChart>
+                                <StackPanel
+                                    Grid.Row="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Orientation="Horizontal">
+                                    <TextBlock x:Name="StartDateMealTextBlock" />
+                                    <TextBlock Text=" - " />
+                                    <TextBlock x:Name="FinishDateMealTextBlock" />
+
+                                </StackPanel>
+
+                                <Button
+                                    Grid.Row="0"
+                                    Click="ButtonThisWeek_Click"
+                                    Content="Текущая неделя" />
+
+                            </Grid>
+
+                        </Grid>
 
                         <DockPanel
                             Grid.Row="1"
@@ -57,7 +93,7 @@
                             <ComboBox
                                 x:Name="EatingComboBox"
                                 MinWidth="160"
-                                MaxWidth="5000"
+                                MaxWidth="1000"
                                 ItemsSource="{Binding Eating}"
                                 Style="{StaticResource ComboBoxStyle}" />
                         </DockPanel>
@@ -71,6 +107,7 @@
                             <TextBox
                                 x:Name="FoodProductTextBox"
                                 MinWidth="180"
+                                MaxWidth="1000"
                                 PreviewTextInput="LettersOnlyTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
                                 TextAlignment="Center" />
@@ -85,6 +122,7 @@
                             <TextBox
                                 x:Name="CarbohydratesTextBox"
                                 MinWidth="188"
+                                MaxWidth="1000"
                                 MaxLength="5"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
@@ -101,6 +139,7 @@
                             <TextBox
                                 x:Name="ProteinTextBox"
                                 MinWidth="273"
+                                MaxWidth="1000"
                                 MaxLength="5"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
@@ -117,6 +156,7 @@
                             <TextBox
                                 x:Name="SugarTextBox"
                                 MinWidth="218"
+                                MaxWidth="1000"
                                 MaxLength="5"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
@@ -133,6 +173,7 @@
                             <TextBox
                                 x:Name="FatsTextBox"
                                 MinWidth="272"
+                                MaxWidth="1000"
                                 MaxLength="5"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
@@ -184,19 +225,64 @@
 
                         </Grid.RowDefinitions>
 
-                        <syncfusion:SfChart
-                            x:Name="GraficWater"
-                            Grid.Row="0"
-                            Grid.ColumnSpan="2"
-                            Margin="0,0,0,20">
+                        <Grid Grid.Row="0" Grid.ColumnSpan="2">
 
-                            <syncfusion:ColumnSeries
-                                Name="ColGraficWater"
-                                ShowTooltip="True"
-                                XBindingPath="Day"
-                                YBindingPath="Liquid" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="70" />
+                            </Grid.ColumnDefinitions>
 
-                        </syncfusion:SfChart>
+                            <Button
+                                Grid.Column="0"
+                                Click="ButtonLeftWater_Click"
+                                Content="Влево" />
+                            <Button
+                                Grid.Column="2"
+                                Click="ButtonRightWater_Click"
+                                Content="Вправо" />
+
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+
+                                <syncfusion:SfChart
+                                    x:Name="GraficWater"
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2">
+
+                                    <syncfusion:ColumnSeries
+                                        Name="ColGraficWater"
+                                        Interior="{DynamicResource AccentAdditionalColor}"
+                                        ShowTooltip="True"
+                                        XBindingPath="Day"
+                                        YBindingPath="Liquid" />
+
+                                </syncfusion:SfChart>
+
+                                <StackPanel
+                                    Grid.Row="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Orientation="Horizontal">
+                                    <TextBlock x:Name="StartDateWaterTextBlock" />
+                                    <TextBlock Text=" - " />
+                                    <TextBlock x:Name="FinishDateWaterTextBlock" />
+
+                                </StackPanel>
+
+                                <Button
+                                    Grid.Row="0"
+                                    Click="ButtonThisWeekWater_Click"
+                                    Content="Текущая неделя" />
+                            </Grid>
+
+
+                        </Grid>
+
 
 
                         <DockPanel
@@ -208,7 +294,7 @@
                             <ComboBox
                                 x:Name="FluidTypeComboBox"
                                 MinWidth="160"
-                                MaxWidth="5000"
+                                MaxWidth="1000"
                                 ItemsSource="{Binding FluidType}"
                                 Style="{StaticResource ComboBoxStyle}" />
                         </DockPanel>
@@ -223,6 +309,7 @@
                             <TextBox
                                 x:Name="WaterLevelTextBox"
                                 MinWidth="180"
+                                MaxWidth="1000"
                                 MaxLength="6"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"

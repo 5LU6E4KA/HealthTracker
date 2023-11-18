@@ -16,6 +16,7 @@
         <ResourceDictionary Source="/Resources/StyleForUIElements/PathStyle.xaml" />
         <ResourceDictionary Source="/Resources/StyleForUIElements/ScrollViewer.xaml" />
         <ResourceDictionary Source="/Resources/StyleForUIElements/ComboBoxStyle.xaml" />
+        <ResourceDictionary Source="/Resources/StyleForUIElements/ChartStyle.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 

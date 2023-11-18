@@ -13,6 +13,7 @@
     <SolidColorBrush x:Key="PrimaryTextColor" Color="#0E1A32" />
     <SolidColorBrush x:Key="SecundaryTextColor" Color="#102341" />
     <SolidColorBrush x:Key="TertiaryTextColor" Color="#1C3254" />
+    <SolidColorBrush x:Key="Grafic" Color="#FFF" />
 
     <SolidColorBrush x:Key="PrimaryWhiteColor" Color="#C0C9EA" />
     <SolidColorBrush x:Key="SecundaryWhiteColor" Color="#EDF4FF" />
