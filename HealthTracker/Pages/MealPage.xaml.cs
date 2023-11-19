@@ -1,4 +1,5 @@
-﻿using HealthTracker.Entities;
+﻿using HealthTracker.ClearFields;
+using HealthTracker.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using static HealthTracker.DateClass.DateInfo;
 
 namespace HealthTracker.Pages
 {
-    
+
     public class Calorie
     {
         public string Day { get; set; }
@@ -53,7 +54,7 @@ namespace HealthTracker.Pages
             FinishDateMealTextBlock.Text = GetFirstDateOfWeek(dateTime.AddDays(7), DayOfWeek.Monday).
                 AddDays(-1).ToString("dd.MM.yyyy");
             var info = DatabaseContext.DBContext.Context.FoodInformations.ToList().
-                Where(x => x.Users == _currentUser && x.MealTime > GetFirstDateOfWeek(dateTime, DayOfWeek.Monday) && 
+                Where(x => x.Users == _currentUser && x.MealTime > GetFirstDateOfWeek(dateTime, DayOfWeek.Monday) &&
                 x.MealTime < GetFirstDateOfWeek(dateTime.AddDays(7), DayOfWeek.Monday));
 
             List<Calorie> calories = new List<Calorie>();
@@ -119,12 +120,34 @@ namespace HealthTracker.Pages
             }
         }
 
+        private static T? ConvertToNullable<T>(string text) where T : struct
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return null;
+            }
+
+            if (typeof(T) == typeof(decimal))
+            {
+                if (decimal.TryParse(text, out var result))
+                {
+                    return (T)Convert.ChangeType(result, typeof(T));
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            return (T)Convert.ChangeType(text, typeof(T));
+        }
+
         public void SaveMeal()
         {
 
-            if (string.IsNullOrWhiteSpace(CarloriesGainedTextBox.Text))
+            if (string.IsNullOrWhiteSpace(CarloriesGainedTextBox.Text) || string.IsNullOrWhiteSpace(FoodProductTextBox.Text))
             {
-                MessageBox.Show("Пожалуйста, введите количество съеденных калорий");
+                MessageBox.Show("Вы забыли указать количество калорий или съеденное блюдо");
                 return;
             }
 
@@ -133,18 +156,23 @@ namespace HealthTracker.Pages
             DatabaseContext.DBContext.Context.FoodInformations.Add(new FoodInformations
             {
                 UserID = _currentUser.UserID,
-                AmountOfSugar = Convert.ToDecimal(SugarTextBox.Text),
+                AmountOfSugar = ConvertToNullable<decimal>(SugarTextBox.Text),
                 AmountOfCalories = Convert.ToDecimal(CarloriesGainedTextBox.Text),
                 Intake = EatingComboBox.SelectedItem?.ToString(),
                 FoodProduct = FoodProductTextBox.Text,
-                AmountOfCarbohydrates = Convert.ToDecimal(CarbohydratesTextBox.Text),
-                AmountOfFat = Convert.ToDecimal(FatsTextBox.Text),
-                AmountOfProtein = Convert.ToDecimal(ProteinTextBox.Text),
+                AmountOfCarbohydrates = ConvertToNullable<decimal>(CarbohydratesTextBox.Text),
+                AmountOfFat = ConvertToNullable<decimal>(FatsTextBox.Text),
+                AmountOfProtein = ConvertToNullable<decimal>(ProteinTextBox.Text),
                 MealTime = mealTime
             });
 
             DatabaseContext.DBContext.Context.SaveChanges();
+
+            ClearField.ClearTextBoxes(this);
+
+            EatingComboBox.SelectedIndex = 0;
         }
+
         public void SaveWater()
         {
 
@@ -162,21 +190,25 @@ namespace HealthTracker.Pages
                 LiquidLevel = Convert.ToDecimal(WaterLevelTextBox.Text),
                 LiquidType = FluidTypeComboBox.SelectedItem?.ToString(),
                 DrinkingTime = waterTime
-            }); 
+            });
 
             DatabaseContext.DBContext.Context.SaveChanges();
+
+            ClearField.ClearTextBoxes(this);
+
+            FluidTypeComboBox.SelectedIndex = 0;
         }
         private void NumericTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
 
-            
+
             if (!char.IsDigit(e.Text, 0) && e.Text != ",")
             {
                 e.Handled = true;
             }
 
-           
+
             if (e.Text == "," && textBox.Text.Contains(","))
             {
                 e.Handled = true;
@@ -185,7 +217,7 @@ namespace HealthTracker.Pages
             if (e.Text == "," && string.IsNullOrEmpty(textBox.Text))
             {
                 textBox.Text = "0,";
-                textBox.CaretIndex = 2; 
+                textBox.CaretIndex = 2;
                 e.Handled = true;
             }
         }
@@ -225,7 +257,7 @@ namespace HealthTracker.Pages
 
         private void ButtonLeftCalories_Click(object sender, RoutedEventArgs e)
         {
-             _currentMealChartDate = _currentMealChartDate.AddDays(-7);
+            _currentMealChartDate = _currentMealChartDate.AddDays(-7);
             ChartUpdateMeal(_currentMealChartDate);
         }
 

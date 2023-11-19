@@ -257,6 +257,7 @@
     </Compile>
     <Compile Include="ChangeTheme\Config.cs" />
     <Compile Include="ChangeTheme\ThemesController.cs" />
+    <Compile Include="ClearFields\ClearField.cs" />
     <Compile Include="DatabaseContext\DBContext.cs" />
     <Compile Include="DateClass\DateInfo.cs" />
     <Compile Include="Entities\BloodPressureInformations.cs">

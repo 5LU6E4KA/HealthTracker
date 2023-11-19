@@ -75,7 +75,11 @@
                                 x:Name="PulseTextBox"
                                 MinWidth="160"
                                 MaxWidth="1000"
-                                Style="{StaticResource LoginTextBoxStyle}" />
+                                MaxLength="3"
+                                PreviewTextInput="NumericIntTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                TextAlignment="Center"
+                                ToolTip="Измеряется в ударах в минуту" />
                         </DockPanel>
 
                         <Button
@@ -165,9 +169,13 @@
                             <Label Content="Систолическое давление" />
                             <TextBox
                                 x:Name="SystolickPressureTextBox"
-                                MinWidth="160"
+                                MinWidth="60"
                                 MaxWidth="1000"
-                                Style="{StaticResource LoginTextBoxStyle}" />
+                                MaxLength="3"
+                                PreviewTextInput="NumericIntTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                TextAlignment="Center"
+                                ToolTip="Верхний показатель измеряется в миллиметрах ртутного столба" />
                         </DockPanel>
 
                         <DockPanel
@@ -178,9 +186,13 @@
                             <Label Content="Диастолическое давление" />
                             <TextBox
                                 x:Name="DiastolickPressureTextBox"
-                                MinWidth="160"
+                                MinWidth="60"
                                 MaxWidth="1000"
-                                Style="{StaticResource LoginTextBoxStyle}" />
+                                MaxLength="3"
+                                PreviewTextInput="NumericIntTextBox_PreviewTextInput"
+                                Style="{StaticResource LoginTextBoxStyle}"
+                                TextAlignment="Center"
+                                ToolTip="Нижний показатель измеряется в миллиметрах ртутного столба" />
                         </DockPanel>
                         <DockPanel
                             Grid.Row="2"
@@ -300,8 +312,10 @@
                                 MinWidth="180"
                                 MaxWidth="1000"
                                 MaxLength="4"
+                                PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
-                                TextAlignment="Center" />
+                                TextAlignment="Center"
+                                ToolTip="Измеряется в градусах Цельсия" />
                         </DockPanel>
 
 

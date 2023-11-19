@@ -36,19 +36,23 @@
 
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="40" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="40" />
                             </Grid.ColumnDefinitions>
 
                             <Button
                                 Grid.Column="0"
+                                VerticalAlignment="Center"
                                 Click="ButtonLeftSleep_Click"
-                                Content="Влево" />
+                                Content="{DynamicResource leftSwitch}"
+                                Style="{StaticResource SwitchWeek}" />
                             <Button
                                 Grid.Column="2"
+                                VerticalAlignment="Center"
                                 Click="ButtonRightSleep_Click"
-                                Content="Вправо" />
+                                Content="{DynamicResource rightSwitch}"
+                                Style="{StaticResource SwitchWeek}" />
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30" />
@@ -72,18 +76,19 @@
                                 <StackPanel
                                     Grid.Row="2"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
+                                    VerticalAlignment="Top"
                                     Orientation="Horizontal">
-                                    <TextBlock x:Name="StartDateSleepTextBlock" />
-                                    <TextBlock Text=" - " />
-                                    <TextBlock x:Name="FinishDateSleepTextBlock" />
+                                    <TextBlock x:Name="StartDateSleepTextBlock" FontSize="14" />
+                                    <TextBlock FontSize="14" Text=" - " />
+                                    <TextBlock x:Name="FinishDateSleepTextBlock" FontSize="14" />
 
                                 </StackPanel>
 
                                 <Button
                                     Grid.Row="0"
                                     Click="ButtonThisWeekSleep_Click"
-                                    Content="Текущая неделя" />
+                                    Content="Текущая неделя"
+                                    Style="{StaticResource ThisWeek}" />
 
                             </Grid>
 
@@ -97,8 +102,8 @@
                             <Label Content="Отход ко сну" />
                             <xctk:DateTimePicker
                                 x:Name="BedTimePicker"
+                                HorizontalAlignment="Stretch"
                                 BorderBrush="Black"
-                                Format="Custom"
                                 FormatString="dd.MM HH:mm"
                                 TextAlignment="Center" />
                         </DockPanel>
@@ -108,7 +113,7 @@
                             Grid.Column="1"
                             Margin="0,0,30,20"
                             HorizontalAlignment="Stretch">
-                            <Label Content="Время пробуджения" />
+                            <Label Content="Пробуджение" />
                             <xctk:DateTimePicker
                                 x:Name="WakeUpTimePicker"
                                 BorderBrush="Black"

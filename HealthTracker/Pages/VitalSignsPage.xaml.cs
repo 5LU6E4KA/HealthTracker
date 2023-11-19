@@ -9,6 +9,8 @@ using System.IO;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using OfficeOpenXml.Drawing.Chart;
+using System.Windows.Input;
+using HealthTracker.ClearFields;
 
 namespace HealthTracker.Pages
 {
@@ -360,6 +362,12 @@ namespace HealthTracker.Pages
                 return;
             }
 
+            if(Convert.ToInt32(PulseTextBox.Text) > 300 || Convert.ToInt32(PulseTextBox.Text) < 0)
+            {
+                MessageBox.Show("Данное значение пульса невозможно у человека");
+                return;
+            }
+
             DatabaseContext.DBContext.Context.PulseInformations.Add(new PulseInformations
             {
                 UserID = _currentUser.UserID,
@@ -368,6 +376,9 @@ namespace HealthTracker.Pages
             });
 
             DatabaseContext.DBContext.Context.SaveChanges();
+
+            ClearField.ClearTextBoxes(this);
+
         }
 
         public void SaveTemperature()
@@ -379,7 +390,7 @@ namespace HealthTracker.Pages
                 return;
             }
 
-            if (Convert.ToDecimal(TemperatureTextBox.Text) > 42 || Convert.ToDecimal(TemperatureTextBox.Text) < 29)
+            if (Convert.ToDecimal(TemperatureTextBox.Text) > 42 || Convert.ToDecimal(TemperatureTextBox.Text) < 0)
             {
                 MessageBox.Show("Человек не может иметь такую температуру");
                 return;
@@ -394,6 +405,10 @@ namespace HealthTracker.Pages
             });
 
             DatabaseContext.DBContext.Context.SaveChanges();
+
+            ClearField.ClearTextBoxes(this);
+
+            PlaceComboBox.SelectedIndex = 0;
         }
 
         public void SaveBloodPressure()
@@ -405,13 +420,13 @@ namespace HealthTracker.Pages
                 return;
             }
 
-            if (Convert.ToInt32(SystolickPressureTextBox.Text) > 240 || Convert.ToInt32(SystolickPressureTextBox.Text) < 80)
+            if (Convert.ToInt32(SystolickPressureTextBox.Text) > 240 || Convert.ToInt32(SystolickPressureTextBox.Text) < 0)
             {
                 MessageBox.Show("Человек не может иметь такое сиастолическое давление");
                 return;
             }
 
-            if (Convert.ToInt32(DiastolickPressureTextBox.Text) > 90 || Convert.ToInt32(DiastolickPressureTextBox.Text) < 55)
+            if (Convert.ToInt32(DiastolickPressureTextBox.Text) > 200 || Convert.ToInt32(DiastolickPressureTextBox.Text) < 0)
             {
                 MessageBox.Show("Человек не может иметь такое диастолическое давление");
                 return;
@@ -427,6 +442,10 @@ namespace HealthTracker.Pages
             });
 
             DatabaseContext.DBContext.Context.SaveChanges();
+
+            ClearField.ClearTextBoxes(this);
+
+            BodyPositionComboBox.SelectedIndex = 0;
         }
 
         private void ButtonSavePulse_Click(object sender, RoutedEventArgs e)
@@ -466,6 +485,46 @@ namespace HealthTracker.Pages
             {
                 MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
             }
+        }
+        private void NumericIntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!IsNumeric(e.Text))
+            {
+                e.Handled = true; 
+            }
+        }
+        private bool IsNumeric(string text)
+        {
+            return text.All(char.IsDigit);
+        }
+
+        private void NumericTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+
+            if (!char.IsDigit(e.Text, 0) && e.Text != ",")
+            {
+                e.Handled = true;
+            }
+
+
+            if (e.Text == "," && textBox.Text.Contains(","))
+            {
+                e.Handled = true;
+            }
+
+            if (e.Text == "," && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = "0,";
+                textBox.CaretIndex = 2;
+                e.Handled = true;
+            }
+        }
+
+        private bool IsNumericInput(string text)
+        {
+            return text.All(char.IsDigit) || text == ",";
         }
     }
 }

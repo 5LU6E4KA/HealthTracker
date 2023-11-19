@@ -35,19 +35,23 @@
 
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="40" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="40" />
                             </Grid.ColumnDefinitions>
 
                             <Button
                                 Grid.Column="0"
+                                VerticalAlignment="Center"
                                 Click="ButtonLeftCalories_Click"
-                                Content="Влево" />
+                                Content="{DynamicResource leftSwitch}"
+                                Style="{StaticResource SwitchWeek}" />
                             <Button
                                 Grid.Column="2"
+                                VerticalAlignment="Center"
                                 Click="ButtonRightCalories_Click"
-                                Content="Вправо" />
+                                Content="{DynamicResource rightSwitch}"
+                                Style="{StaticResource SwitchWeek}" />
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30" />
@@ -67,18 +71,19 @@
                                 <StackPanel
                                     Grid.Row="2"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
+                                    VerticalAlignment="Top"
                                     Orientation="Horizontal">
-                                    <TextBlock x:Name="StartDateMealTextBlock" />
-                                    <TextBlock Text=" - " />
-                                    <TextBlock x:Name="FinishDateMealTextBlock" />
+                                    <TextBlock x:Name="StartDateMealTextBlock" FontSize="14" />
+                                    <TextBlock FontSize="14" Text=" - " />
+                                    <TextBlock x:Name="FinishDateMealTextBlock" FontSize="14" />
 
                                 </StackPanel>
 
                                 <Button
                                     Grid.Row="0"
                                     Click="ButtonThisWeek_Click"
-                                    Content="Текущая неделя" />
+                                    Content="Текущая неделя"
+                                    Style="{StaticResource ThisWeek}" />
 
                             </Grid>
 
@@ -108,6 +113,7 @@
                                 x:Name="FoodProductTextBox"
                                 MinWidth="180"
                                 MaxWidth="1000"
+                                MaxLength="140"
                                 PreviewTextInput="LettersOnlyTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
                                 TextAlignment="Center" />
@@ -126,8 +132,8 @@
                                 MaxLength="5"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
-                                Text="0"
-                                TextAlignment="Center" />
+                                TextAlignment="Center"
+                                ToolTip="Измеряются в граммах" />
                         </DockPanel>
 
                         <DockPanel
@@ -143,8 +149,8 @@
                                 MaxLength="5"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
-                                Text="0"
-                                TextAlignment="Center" />
+                                TextAlignment="Center"
+                                ToolTip="Измеряются в граммах" />
                         </DockPanel>
 
                         <DockPanel
@@ -160,8 +166,8 @@
                                 MaxLength="5"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
-                                Text="0"
-                                TextAlignment="Center" />
+                                TextAlignment="Center"
+                                ToolTip="Измеряется в граммах" />
                         </DockPanel>
 
                         <DockPanel
@@ -177,8 +183,8 @@
                                 MaxLength="5"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
-                                Text="0"
-                                TextAlignment="Center" />
+                                TextAlignment="Center"
+                                ToolTip="Измеряются в граммах" />
                         </DockPanel>
 
                         <DockPanel
@@ -194,7 +200,8 @@
                                 MaxLength="6"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
-                                TextAlignment="Center" />
+                                TextAlignment="Center"
+                                ToolTip="Измеряются в килокалориях" />
                         </DockPanel>
 
                         <Button
@@ -228,19 +235,23 @@
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="40" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="40" />
                             </Grid.ColumnDefinitions>
 
                             <Button
                                 Grid.Column="0"
+                                VerticalAlignment="Center"
                                 Click="ButtonLeftWater_Click"
-                                Content="Влево" />
+                                Content="{DynamicResource leftSwitch}"
+                                Style="{StaticResource SwitchWeek}" />
                             <Button
                                 Grid.Column="2"
+                                VerticalAlignment="Center"
                                 Click="ButtonRightWater_Click"
-                                Content="Вправо" />
+                                Content="{DynamicResource rightSwitch}"
+                                Style="{StaticResource SwitchWeek}" />
 
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
@@ -266,18 +277,19 @@
                                 <StackPanel
                                     Grid.Row="2"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
+                                    VerticalAlignment="Top"
                                     Orientation="Horizontal">
-                                    <TextBlock x:Name="StartDateWaterTextBlock" />
-                                    <TextBlock Text=" - " />
-                                    <TextBlock x:Name="FinishDateWaterTextBlock" />
+                                    <TextBlock x:Name="StartDateWaterTextBlock" FontSize="14" />
+                                    <TextBlock FontSize="14" Text=" - " />
+                                    <TextBlock x:Name="FinishDateWaterTextBlock" FontSize="14" />
 
                                 </StackPanel>
 
                                 <Button
                                     Grid.Row="0"
                                     Click="ButtonThisWeekWater_Click"
-                                    Content="Текущая неделя" />
+                                    Content="Текущая неделя"
+                                    Style="{StaticResource ThisWeek}" />
                             </Grid>
 
 
@@ -313,7 +325,8 @@
                                 MaxLength="6"
                                 PreviewTextInput="NumericTextBox_PreviewTextInput"
                                 Style="{StaticResource LoginTextBoxStyle}"
-                                TextAlignment="Center" />
+                                TextAlignment="Center"
+                                ToolTip="Измеряется в милилитрах" />
                         </DockPanel>
 
 

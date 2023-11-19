@@ -94,6 +94,9 @@ namespace HealthTracker.Pages
             });
 
             DatabaseContext.DBContext.Context.SaveChanges();
+
+            BedTimePicker.Text = "";
+            WakeUpTimePicker.Text = "";
         }
 
         private Dictionary<DayOfWeek, string> dayOfWeeks = new Dictionary<DayOfWeek, string>
