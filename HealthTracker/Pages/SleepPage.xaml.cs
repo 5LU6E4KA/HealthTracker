@@ -2,19 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static HealthTracker.DateClass.DateInfo;
-using static HealthTracker.Pages.SleepPage;
 
 namespace HealthTracker.Pages
 {
@@ -29,13 +19,14 @@ namespace HealthTracker.Pages
             public int SleepTime { get; set; }
         }
         private Users _currentUser;
+        private DateTime _currentSleepChartDate = DateTime.Now;
         public SleepPage(Users user)
         {
             InitializeComponent();
             _currentUser = user;
             BedTimePicker.DefaultValue = DateTime.Now;
             WakeUpTimePicker.DefaultValue = DateTime.Now;
-            ChartUpdateSleep();
+            ChartUpdateSleep(DateTime.Now);
         }
 
         private void ButtonSaveSleep_Click(object sender, RoutedEventArgs e)
@@ -43,7 +34,7 @@ namespace HealthTracker.Pages
             try
             {
                 SaveSleep();
-                ChartUpdateSleep();
+                ChartUpdateSleep(DateTime.Now);
             }
             catch (Exception ex)
             {
@@ -53,8 +44,9 @@ namespace HealthTracker.Pages
 
         private int GetDaySleepTime(DateTime dateTime)
         {
-            var info = DatabaseContext.DBContext.Context.SleepInformations.ToList().Where(x => x.Users == _currentUser && x.SleepTime.Value.Date == dateTime.Date);
-           
+            var info = DatabaseContext.DBContext.Context.SleepInformations.ToList().
+                Where(x => x.Users == _currentUser && x.SleepTime.Value.Date == dateTime.Date);
+
             var sleeping = new TimeSpan(0);
             foreach (var elem in info)
             {
@@ -67,30 +59,30 @@ namespace HealthTracker.Pages
         {
             var wakeUp = WakeUpTimePicker.Value;
             var bedTime = BedTimePicker.Value;
-            if (wakeUp is null || bedTime is null )
+            if (wakeUp is null || bedTime is null)
             {
                 MessageBox.Show("Пожалуйста, введите время");
                 return;
             }
 
-            if(bedTime > wakeUp)
+            if (bedTime > wakeUp)
             {
                 MessageBox.Show("Пожалуйста, введите корректное значение времени");
                 return;
             }
-            
-            if(GetDaySleepTime(DateTime.Now) + (wakeUp - bedTime).Value.TotalHours > 24)
+
+            if (GetDaySleepTime(DateTime.Now) + (wakeUp - bedTime).Value.TotalHours > 24)
             {
                 MessageBox.Show("Вы не можете спать больше 24 часов в день");
                 return;
             }
 
-            if(bedTime > DateTime.Now || wakeUp > DateTime.Now)
+            if (bedTime > DateTime.Now || wakeUp > DateTime.Now)
             {
                 MessageBox.Show("Вы не можете лечь спать или проснуться в будущем");
                 return;
             }
-            
+
 
             DatabaseContext.DBContext.Context.SleepInformations.Add(new SleepInformations
             {
@@ -98,7 +90,7 @@ namespace HealthTracker.Pages
                 SleepTime = DateTime.Now,
                 BedTime = (DateTime)bedTime,
                 WakeUpTime = (DateTime)wakeUp
-               
+
             });
 
             DatabaseContext.DBContext.Context.SaveChanges();
@@ -116,20 +108,44 @@ namespace HealthTracker.Pages
 
         };
 
-        private void ChartUpdateSleep()
+        private void ChartUpdateSleep(DateTime dateTime)
         {
-            var info = DatabaseContext.DBContext.Context.SleepInformations.ToList().Where(x => x.Users == _currentUser && x.SleepTime > GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Monday));
+            _currentSleepChartDate = dateTime;
+            StartDateSleepTextBlock.Text = GetFirstDateOfWeek(dateTime, DayOfWeek.Monday).ToString("dd.MM.yyyy");
+            FinishDateSleepTextBlock.Text = GetFirstDateOfWeek(dateTime.AddDays(7), DayOfWeek.Monday).
+                AddDays(-1).ToString("dd.MM.yyyy");
+            var info = DatabaseContext.DBContext.Context.SleepInformations.ToList().
+                Where(x => x.Users == _currentUser && x.SleepTime > GetFirstDateOfWeek(dateTime, DayOfWeek.Monday) &&
+                x.SleepTime < GetFirstDateOfWeek(dateTime.AddDays(7), DayOfWeek.Monday));
 
             List<Sleeping> sleepings = new List<Sleeping>();
             foreach (var item in dayOfWeeks)
             {
                 var sleep = info.Where(x => x.SleepTime.Value.DayOfWeek == item.Key);
-                
-                
+
+
                 sleepings.Add(new Sleeping { Day = item.Value, SleepTime = sleep.Count() == 0 ? 0 : GetDaySleepTime(sleep.First().SleepTime.Value) });
             }
             ColGraficSleeps.ItemsSource = sleepings;
         }
+
+        private void ButtonLeftSleep_Click(object sender, RoutedEventArgs e)
+        {
+            _currentSleepChartDate = _currentSleepChartDate.AddDays(-7);
+            ChartUpdateSleep(_currentSleepChartDate);
+        }
+
+        private void ButtonRightSleep_Click(object sender, RoutedEventArgs e)
+        {
+            _currentSleepChartDate = _currentSleepChartDate.AddDays(7);
+            ChartUpdateSleep(_currentSleepChartDate);
+        }
+
+        private void ButtonThisWeekSleep_Click(object sender, RoutedEventArgs e)
+        {
+            _currentSleepChartDate = DateTime.Now;
+            ChartUpdateSleep(_currentSleepChartDate);
+        }
     }
-    
+
 }

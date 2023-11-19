@@ -34,20 +34,60 @@
 
                         </Grid.RowDefinitions>
 
-                        <syncfusion:SfChart
-                            x:Name="GraficSleep"
-                            Grid.Row="0"
-                            Grid.ColumnSpan="2"
-                            Margin="0,0,0,20">
+                        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="70" />
+                            </Grid.ColumnDefinitions>
 
-                            <syncfusion:ColumnSeries
-                                Name="ColGraficSleeps"
-                                Interior="{DynamicResource AccentAdditionalColor}"
-                                ShowTooltip="True"
-                                XBindingPath="Day"
-                                YBindingPath="SleepTime" />
+                            <Button
+                                Grid.Column="0"
+                                Click="ButtonLeftSleep_Click"
+                                Content="Влево" />
+                            <Button
+                                Grid.Column="2"
+                                Click="ButtonRightSleep_Click"
+                                Content="Вправо" />
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <syncfusion:SfChart
+                                    x:Name="GraficSleep"
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2">
 
-                        </syncfusion:SfChart>
+                                    <syncfusion:ColumnSeries
+                                        Name="ColGraficSleeps"
+                                        Interior="{DynamicResource AccentAdditionalColor}"
+                                        ShowTooltip="True"
+                                        XBindingPath="Day"
+                                        YBindingPath="SleepTime" />
+
+                                </syncfusion:SfChart>
+
+                                <StackPanel
+                                    Grid.Row="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Orientation="Horizontal">
+                                    <TextBlock x:Name="StartDateSleepTextBlock" />
+                                    <TextBlock Text=" - " />
+                                    <TextBlock x:Name="FinishDateSleepTextBlock" />
+
+                                </StackPanel>
+
+                                <Button
+                                    Grid.Row="0"
+                                    Click="ButtonThisWeekSleep_Click"
+                                    Content="Текущая неделя" />
+
+                            </Grid>
+
+                        </Grid>
 
                         <DockPanel
                             Grid.Row="1"

@@ -80,14 +80,26 @@
 
                         <Button
                             Grid.Row="2"
-                            Grid.Column="1"
+                            Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Width="150"
                             Height="50"
-                            Margin="0,20,0,10"
-                            HorizontalAlignment="Center"
+                            Margin="30,20,0,10"
+                            HorizontalAlignment="Left"
                             Click="ButtonSavePulse_Click"
                             Content="Сохранить"
+                            Style="{StaticResource SignInButtonStyle}" />
+
+                        <Button
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Width="150"
+                            Height="50"
+                            Margin="0,20,30,10"
+                            HorizontalAlignment="Right"
+                            Click="ButtonExportToExcelPulse_Click"
+                            Content="Экспорт"
                             Style="{StaticResource SignInButtonStyle}" />
                     </Grid>
                 </Expander>
@@ -190,11 +202,25 @@
                             Grid.ColumnSpan="2"
                             Width="150"
                             Height="50"
-                            Margin="0,20,0,10"
-                            HorizontalAlignment="Center"
+                            Margin="30,20,0,10"
+                            HorizontalAlignment="Left"
                             Click="ButtonSavePressure_Click"
                             Content="Сохранить"
                             Style="{StaticResource SignInButtonStyle}" />
+
+                        <Button
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Width="150"
+                            Height="50"
+                            Margin="0,20,30,10"
+                            HorizontalAlignment="Right"
+                            Click="ButtonExportToExcelBloodPressure_Click"
+                            Content="Экспорт"
+                            Style="{StaticResource SignInButtonStyle}" />
+
+
 
 
                     </Grid>
@@ -284,10 +310,22 @@
                             Grid.ColumnSpan="2"
                             Width="150"
                             Height="50"
-                            Margin="0,20,0,10"
-                            HorizontalAlignment="Center"
+                            Margin="30,20,0,10"
+                            HorizontalAlignment="Left"
                             Click="ButtonSaveTemperature_Click"
                             Content="Сохранить"
+                            Style="{StaticResource SignInButtonStyle}" />
+
+                        <Button
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Width="150"
+                            Height="50"
+                            Margin="0,20,30,10"
+                            HorizontalAlignment="Right"
+                            Click="ButtonExportToExcelTemperature_Click"
+                            Content="Экспорт"
                             Style="{StaticResource SignInButtonStyle}" />
 
                     </Grid>
