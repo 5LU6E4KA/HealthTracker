@@ -104,6 +104,7 @@
                                 x:Name="BedTimePicker"
                                 HorizontalAlignment="Stretch"
                                 BorderBrush="Black"
+                                Format="Custom"
                                 FormatString="dd.MM HH:mm"
                                 TextAlignment="Center" />
                         </DockPanel>
