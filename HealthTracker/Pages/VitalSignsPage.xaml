@@ -318,7 +318,6 @@
                                 ToolTip="Измеряется в градусах Цельсия" />
                         </DockPanel>
 
-
                         <Button
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
