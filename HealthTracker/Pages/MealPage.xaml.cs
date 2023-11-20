@@ -142,6 +142,15 @@ namespace HealthTracker.Pages
             return (T)Convert.ChangeType(text, typeof(T));
         }
 
+        private bool CheckDecimal(string text)
+        {
+            if(decimal.TryParse(text, out var result))
+            {
+                return result > 999;
+            }
+            return true;
+        }
+
         public void SaveMeal()
         {
 
@@ -150,6 +159,19 @@ namespace HealthTracker.Pages
                 MessageBox.Show("Вы забыли указать количество калорий или съеденное блюдо");
                 return;
             }
+
+            if(Convert.ToDecimal(CarloriesGainedTextBox.Text) > 9999)
+            {
+                MessageBox.Show("Ограничение в 9999 килокалорий");
+                return;
+            }
+
+            if (new string[] { SugarTextBox.Text, CarbohydratesTextBox.Text, FatsTextBox.Text, ProteinTextBox.Text }.Any(x => CheckDecimal(x)))
+            {
+                MessageBox.Show("Ограничение в 999 грамм");
+                return;
+            }
+
 
             DateTime mealTime = DateTime.Now;
 
@@ -179,6 +201,12 @@ namespace HealthTracker.Pages
             if (string.IsNullOrWhiteSpace(WaterLevelTextBox.Text))
             {
                 MessageBox.Show("Пожалуйста, введите количество выпитой жидкости");
+                return;
+            }
+
+            if (Convert.ToDecimal(WaterLevelTextBox.Text) > 9999)
+            {
+                MessageBox.Show("Ограничение в 9999 миллилитров");
                 return;
             }
 
