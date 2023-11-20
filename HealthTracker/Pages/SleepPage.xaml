@@ -88,6 +88,7 @@
                                     Grid.Row="0"
                                     Click="ButtonThisWeekSleep_Click"
                                     Content="Текущая неделя"
+                                    FontSize="14"
                                     Style="{StaticResource ThisWeek}" />
 
                             </Grid>

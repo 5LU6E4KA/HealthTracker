@@ -83,6 +83,7 @@
                                     Grid.Row="0"
                                     Click="ButtonThisWeek_Click"
                                     Content="Текущая неделя"
+                                    FontSize="14"
                                     Style="{StaticResource ThisWeek}" />
 
                             </Grid>
@@ -289,6 +290,7 @@
                                     Grid.Row="0"
                                     Click="ButtonThisWeekWater_Click"
                                     Content="Текущая неделя"
+                                    FontSize="14"
                                     Style="{StaticResource ThisWeek}" />
                             </Grid>
 
